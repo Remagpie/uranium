@@ -4,5 +4,8 @@
 	"description": "",
 	"scripts": {},
 	"author": "Joonmo Yang <dev@remagpie.com>",
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"electron": "^9.0.0"
+	}
 }
