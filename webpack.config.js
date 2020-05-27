@@ -11,7 +11,7 @@ const srcDir = path.join(rootDir, "src");
 
 module.exports = {
 	target: "electron-renderer",
-	entry: path.join(srcDir, "index.ts"),
+	entry: path.join(srcDir, "index.tsx"),
 	output: {
 		path: buildDir,
 		filename: "index.js",
