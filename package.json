@@ -2,10 +2,20 @@
 	"name": "uranium",
 	"version": "0.1.0",
 	"description": "",
-	"scripts": {},
+	"scripts": {
+		"start": "run-p start:electron start:webpack",
+		"start:electron": "wait-on http://localhost:8080 && electron electron/index.js",
+		"start:webpack": "webpack-dev-server --config webpack.config.js"
+	},
 	"author": "Joonmo Yang <dev@remagpie.com>",
 	"license": "MIT",
 	"devDependencies": {
-		"electron": "^9.0.0"
+		"electron": "^9.0.0",
+		"html-webpack-plugin": "^4.3.0",
+		"npm-run-all": "^4.1.5",
+		"wait-on": "^5.0.0",
+		"webpack": "^4.43.0",
+		"webpack-cli": "^3.3.11",
+		"webpack-dev-server": "^3.11.0"
 	}
 }

@@ -9,7 +9,7 @@ async function main() {
 		},
 	});
 
-	win.loadFile("index.html");
+	win.loadURL("http://localhost:8080");
 	win.webContents.openDevTools();
 }
 
