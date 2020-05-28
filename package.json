@@ -10,7 +10,9 @@
 	"author": "Joonmo Yang <dev@remagpie.com>",
 	"license": "MIT",
 	"dependencies": {
-		"preact": "^10.4.4"
+		"immer": "^6.0.9",
+		"preact": "^10.4.4",
+		"redux": "^4.0.5"
 	},
 	"devDependencies": {
 		"electron": "^9.0.0",
