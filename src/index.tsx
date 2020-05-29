@@ -4,13 +4,14 @@ import type {FunctionComponent} from "preact";
 import {Provider, useSelector} from "react-redux";
 
 import PaneRenderer from "./components/PaneRenderer";
-import store, {State} from "./store";
+import store from "./store";
+import {selectPaneList} from "./store/pane";
 
 const App: FunctionComponent = () => {
-	const panes = useSelector<State>((state) => Object.values(state.pane.pane));
+	const panes = useSelector(selectPaneList);
 
 	return (
-		<PaneRenderer panes={panes as any} />
+		<PaneRenderer panes={panes} />
 	);
 };
 
