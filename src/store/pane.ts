@@ -3,7 +3,7 @@ import {createSelector} from "reselect";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
-import {Pane} from "../types/pane";
+import Pane from "../types/pane";
 import {State as RootState} from "./index";
 
 export type State = {
@@ -27,11 +27,7 @@ export type Action =
 
 export const reducer = createReducer<State, Action>(initialState, {
 	"pane/put": (state, action) => produce(state, (s) => {
-		const {id, items, active} = action.payload;
-		s.pane[id] = {
-			id,
-			items,
-			active,
-		};
+		const pane = action.payload;
+		s.pane[pane.id] = pane;
 	}),
 });

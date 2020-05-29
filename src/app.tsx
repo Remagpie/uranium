@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import PaneRenderer from "./components/PaneRenderer";
 import {useDispatch} from "./store";
 import {selectPaneList, putPane} from "./store/pane";
+import Pane from "./types/pane";
 
 const useGlobalStyles = createUseStyles({
 	"@global": {
@@ -35,11 +36,7 @@ const App: FunctionComponent = () => {
 
 	useEffect(() => {
 		// Insert a default pane
-		dispatch(putPane({
-			// TODO: Generate a random uuid
-			id: "SOME_RANDOM_ID",
-			items: [],
-		}));
+		dispatch(putPane(new Pane([])));
 	}, []);
 
 	return (
