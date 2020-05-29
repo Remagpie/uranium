@@ -16,7 +16,7 @@ const initialState: State = {
 	pane: {},
 };
 
-export const selectState = (state: RootState) => state.pane;
+export const selectState = (state: RootState): State => state.pane;
 export const selectPaneMap = createSelector(selectState, (state) => state.pane);
 export const selectPaneList = createSelector(selectPaneMap, (pane) => Object.values(pane));
 
