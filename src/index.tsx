@@ -1,14 +1,23 @@
 import {h, render} from "preact";
 import type {FunctionComponent} from "preact";
 
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 
-import store from "./store";
+import PaneRenderer from "./components/PaneRenderer";
+import store, {State} from "./store";
 
-const App: FunctionComponent = () => (
+const App: FunctionComponent = () => {
+	const panes = useSelector<State>((state) => Object.values(state.pane.pane));
+
+	return (
+		<PaneRenderer panes={panes as any} />
+	);
+};
+
+const Root: FunctionComponent = () => (
 	<Provider store={store}>
-		<h1>Hello, World!</h1>
+		<App />
 	</Provider>
 );
 
-render(<App />, document.getElementById("root")!);
+render(<Root />, document.getElementById("root")!);
