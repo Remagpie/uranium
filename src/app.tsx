@@ -1,11 +1,13 @@
 import {h} from "preact";
 import type {FunctionComponent} from "preact";
 
+import {useEffect} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
 import PaneRenderer from "./components/PaneRenderer";
-import {selectPaneList} from "./store/pane";
+import {useDispatch} from "./store";
+import {selectPaneList, putPane} from "./store/pane";
 
 const useGlobalStyles = createUseStyles({
 	"@global": {
@@ -28,7 +30,17 @@ const useGlobalStyles = createUseStyles({
 const App: FunctionComponent = () => {
 	useGlobalStyles();
 
+	const dispatch = useDispatch();
 	const panes = useSelector(selectPaneList);
+
+	useEffect(() => {
+		// Insert a default pane
+		dispatch(putPane({
+			// TODO: Generate a random uuid
+			id: "SOME_RANDOM_ID",
+			items: [],
+		}));
+	}, []);
 
 	return (
 		<PaneRenderer panes={panes} />
