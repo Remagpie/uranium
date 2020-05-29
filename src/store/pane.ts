@@ -1,8 +1,10 @@
 import produce from "immer";
+import {createSelector} from "reselect";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
 import {Pane} from "../types/pane";
+import {State as RootState} from "./index";
 
 export type State = {
 	pane: {
@@ -13,6 +15,10 @@ export type State = {
 const initialState: State = {
 	pane: {},
 };
+
+export const selectState = (state: RootState) => state.pane;
+export const selectPaneMap = createSelector(selectState, (state) => state.pane);
+export const selectPaneList = createSelector(selectPaneMap, (pane) => Object.values(pane));
 
 export const setPane = createAction("pane/set")<{
 	id: Pane["id"];
