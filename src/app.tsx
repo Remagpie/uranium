@@ -6,6 +6,7 @@ import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
 import PaneRenderer from "./components/PaneRenderer";
+import useResetStyles from "./reset-style";
 import {useDispatch} from "./store";
 import {selectPaneList, putPane} from "./store/pane";
 import Pane from "./types/pane";
@@ -19,7 +20,6 @@ const useGlobalStyles = createUseStyles({
 		body: {
 			width: "100%",
 			height: "100%",
-			margin: 0,
 		},
 		"#root": {
 			width: "100%",
@@ -29,6 +29,7 @@ const useGlobalStyles = createUseStyles({
 });
 
 const App: FunctionComponent = () => {
+	useResetStyles();
 	useGlobalStyles();
 
 	const dispatch = useDispatch();
