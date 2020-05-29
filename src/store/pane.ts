@@ -20,17 +20,13 @@ export const selectState = (state: RootState) => state.pane;
 export const selectPaneMap = createSelector(selectState, (state) => state.pane);
 export const selectPaneList = createSelector(selectPaneMap, (pane) => Object.values(pane));
 
-export const setPane = createAction("pane/set")<{
-	id: Pane["id"];
-	items: Pane["items"];
-	active: Pane["active"];
-}>();
+export const putPane = createAction("pane/put")<Pane>();
 
 export type Action =
-	| ActionType<typeof setPane>;
+	| ActionType<typeof putPane>;
 
 export const reducer = createReducer<State, Action>(initialState, {
-	"pane/set": (state, action) => produce(state, (s) => {
+	"pane/put": (state, action) => produce(state, (s) => {
 		const {id, items, active} = action.payload;
 		s.pane[id] = {
 			id,
