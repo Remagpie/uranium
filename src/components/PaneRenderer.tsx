@@ -1,7 +1,7 @@
 import {h} from "preact";
 import type {FunctionComponent} from "preact";
 
-import type {Pane} from "../types/pane";
+import type Pane from "../types/pane";
 import PaneView from "./PaneView";
 
 type Props = {
