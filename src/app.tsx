@@ -8,7 +8,9 @@ import {useSelector} from "react-redux";
 import PaneRenderer from "./components/PaneRenderer";
 import useResetStyles from "./reset-style";
 import {useDispatch} from "./store";
+import {putCommand} from "./store/command";
 import {selectPaneList, putPane} from "./store/pane";
+import Command from "./types/command";
 import Pane from "./types/pane";
 
 const useGlobalStyles = createUseStyles({
@@ -38,6 +40,14 @@ const App: FunctionComponent = () => {
 	useEffect(() => {
 		// Insert a default pane
 		dispatch(putPane(new Pane([])));
+		// Insert builtin commands
+		dispatch(putCommand(new Command({
+			id: "buffer/open-file",
+			package: "buffer",
+			title: "Open a file",
+			description: "",
+			action: "buffer/open-file",
+		})));
 	}, []);
 
 	return (
