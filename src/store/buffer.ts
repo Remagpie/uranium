@@ -2,26 +2,26 @@ import produce from "immer";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
-import type {TextBuffer} from "../types/buffer";
+import type {BaseBuffer} from "../types/buffer/base";
+import type {State as RootState} from "./index";
 
 export type State = {
-	[key: string]: TextBuffer;
+	[id: string]: BaseBuffer;
 };
 
 const initialState: State = {};
 
-export const setBuffer = createAction("buffer/set")<{
-	id: string;
-}>();
+export const selectState = (state: RootState) => state.buffer;
+export const selectBuffer = (id: BaseBuffer["id"]) => (state: RootState) => selectState(state)[id];
+
+export const putBuffer = createAction("buffer/put")<BaseBuffer>();
 
 export type Action =
-	| ActionType<typeof setBuffer>;
+	| ActionType<typeof putBuffer>;
 
 export const reducer = createReducer<State, Action>(initialState, {
-	"buffer/set": (state, action) => produce(state, (s) => {
-		const {id} = action.payload;
-		s[id] = {
-			id,
-		};
+	"buffer/put": (state, action) => produce(state, (s) => {
+		const buffer = action.payload;
+		s[buffer.id] = buffer;
 	}),
 });
