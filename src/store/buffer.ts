@@ -12,7 +12,6 @@ export type State = {
 const initialState: State = {};
 
 export const selectState = (state: RootState): State => state.buffer;
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const selectBuffer = (id: BaseBuffer["id"]) => (state: RootState) => selectState(state)[id];
 
 export const putBuffer = createAction("buffer/put")<BaseBuffer>();

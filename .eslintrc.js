@@ -141,6 +141,7 @@ module.exports = {
 		"@typescript-eslint/consistent-type-definitions": ["error", "type"],
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/explicit-member-accessibility": "error",
+		"@typescript-eslint/explicit-module-boundary-types": "off",
 		"@typescript-eslint/func-call-spacing": "error",
 		"@typescript-eslint/indent": ["error", "tab", { SwitchCase: 1 }],
 		"@typescript-eslint/method-signature-style": "error",

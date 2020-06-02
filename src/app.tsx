@@ -8,8 +8,10 @@ import {useSelector} from "react-redux";
 import PaneRenderer from "./components/PaneRenderer";
 import useResetStyles from "./reset-style";
 import {useDispatch} from "./store";
-import {putCommand} from "./store/command";
+import {putBuffer} from "./store/buffer";
+import {putCommand, runCommand} from "./store/command";
 import {selectPaneList, putPane} from "./store/pane";
+import TextBuffer from "./types/buffer/text";
 import Command from "./types/command";
 import Pane from "./types/pane";
 
@@ -39,15 +41,21 @@ const App: FunctionComponent = () => {
 
 	useEffect(() => {
 		// Insert a default pane
-		dispatch(putPane(new Pane([])));
+		dispatch(putPane(new Pane()));
 		// Insert builtin commands
 		dispatch(putCommand(new Command({
 			id: "buffer/open-file",
 			package: "buffer",
 			title: "Open a file",
 			description: "",
-			action: "buffer/open-file",
+			thunk: async (dispatch2) => {
+				// TODO: accept the path from the user input
+				const buffer = await TextBuffer.open("./package.json");
+				dispatch2(putBuffer(buffer));
+				dispatch2(putPane(new Pane(buffer.id)));
+			},
 		})));
+		dispatch(runCommand("buffer/open-file"));
 	}, []);
 
 	return (
