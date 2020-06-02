@@ -4,12 +4,10 @@ import {BaseBuffer} from "./buffer/base";
 
 export default class Pane {
 	public id: string;
-	public items: BaseBuffer[];
-	public active?: BaseBuffer["id"];
+	public buffer?: BaseBuffer["id"];
 
-	public constructor(items: BaseBuffer[], active?: BaseBuffer["id"]) {
+	public constructor(buffer?: BaseBuffer["id"]) {
 		this.id = uuid();
-		this.items = items;
-		this.active = active;
+		this.buffer = buffer;
 	}
 }

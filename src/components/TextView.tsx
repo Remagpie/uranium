@@ -1,7 +1,7 @@
 import {h} from "preact";
 import type {FunctionComponent} from "preact";
 
-import type TextBuffer from "../types/buffer/text";
+import TextBuffer from "../types/buffer/text";
 
 type Props = {
 	buffer: TextBuffer;
@@ -12,7 +12,7 @@ const TextView: FunctionComponent<Props> = (props) => {
 
 	return (
 		<textarea>
-			{buffer.id}
+			{buffer.content}
 		</textarea>
 	);
 };

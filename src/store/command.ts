@@ -3,7 +3,7 @@ import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
 import Command from "../types/command";
-import {State as RootState} from "./index";
+import {State as RootState, ThunkAction} from "./index";
 
 export type State = {
 	[id: string]: Command;
@@ -15,6 +15,15 @@ export const selectState = (state: RootState) => state.command;
 export const selectCommand = (id: string) => (state: RootState) => selectState(state)[id];
 
 export const putCommand = createAction("command/put")<Command>();
+
+export function runCommand(id: string): ThunkAction<void> {
+	return (dispatch, getState) => {
+		const state = getState();
+		const command = selectCommand(id)(state);
+
+		return dispatch(command.thunk);
+	};
+};
 
 export type Action =
 	| ActionType<typeof putCommand>;

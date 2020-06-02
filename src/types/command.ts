@@ -1,9 +1,11 @@
+import type {ThunkAction} from "../store";
+
 type CommandOption = {
 	id: string;
 	package: string;
 	title: string;
 	description: string;
-	action: string;
+	thunk: ThunkAction<any>;
 };
 
 export default class Command {
@@ -11,13 +13,13 @@ export default class Command {
 	public package: string;
 	public title: string;
 	public description: string;
-	public action: string;
+	public thunk: ThunkAction<any>;
 
 	public constructor(options: CommandOption) {
 		this.id = options.id;
 		this.package = options.package;
 		this.title = options.title;
 		this.description = options.description;
-		this.action = options.action;
+		this.thunk = options.thunk;
 	}
 }

@@ -14,13 +14,12 @@ type Props = {
 const PaneView: FunctionComponent<Props> = (props) => {
 	const {pane} = props;
 
-	if (pane.active == null) {
+	if (pane.buffer == null) {
 		return <EmptyView />;
 	} else {
-		const buffer = useSelector(selectBuffer(pane.active));
-		const View = buffer.view();
+		const buffer = useSelector(selectBuffer(pane.buffer));
 
-		return <View buffer={buffer} />;
+		return <buffer.View />;
 	}
 };
 
