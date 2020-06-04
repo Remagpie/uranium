@@ -6,6 +6,7 @@ import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
 import PaneRenderer from "./components/PaneRenderer";
+import PaneView from "./components/PaneView";
 import useResetStyles from "./reset-style";
 import {useDispatch} from "./store";
 import {putBuffer} from "./store/buffer";
@@ -59,7 +60,9 @@ const App: FunctionComponent = () => {
 	}, []);
 
 	return (
-		<PaneRenderer panes={panes} />
+		<PaneRenderer>
+			{panes.map((p) => <PaneView pane={p} />)}
+		</PaneRenderer>
 	);
 };
 

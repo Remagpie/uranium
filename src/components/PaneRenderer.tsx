@@ -1,16 +1,15 @@
 import {h} from "preact";
-import type {FunctionComponent} from "preact";
+import type {ComponentProps, FunctionComponent, VNode} from "preact";
 
-import type Pane from "../types/pane";
 import PaneView from "./PaneView";
 
 type Props = {
-	panes: Pane[];
+	children: VNode<ComponentProps<typeof PaneView>>[];
 };
 
 const PaneRenderer: FunctionComponent<Props> = (props) => (
 	<div>
-		{props.panes.map((pane) => <PaneView pane={pane} />)}
+		{props.children}
 	</div>
 );
 
