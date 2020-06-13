@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 
 import {selectBuffer} from "../store/buffer";
 import LeafPane from "../types/pane/leaf";
-import EmptyView from "./EmptyView";
+import EmptyBufferView from "./EmptyBufferView";
 
 const useStyles = createUseStyles({
 	root: {
@@ -26,7 +26,7 @@ const LeafPaneView: FunctionComponent<Props> = (props) => {
 
 	let view: VNode;
 	if (pane.buffer.length === 0) {
-		view = <EmptyView />;
+		view = <EmptyBufferView />;
 	} else {
 		// TODO: Show the active buffer
 		const buffer = useSelector(selectBuffer(pane.buffer[0]));

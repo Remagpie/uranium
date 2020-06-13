@@ -10,10 +10,10 @@ const useStyles = createUseStyles({
 	},
 });
 
-const EmptyView: FunctionComponent = () => {
+const EmptyBufferView: FunctionComponent = () => {
 	const styles = useStyles();
 
 	return <div className={styles.root} />;
 };
 
-export default EmptyView;
+export default EmptyBufferView;
