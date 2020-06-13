@@ -1,3 +1,5 @@
+import {immerable} from "immer";
+
 import type {ThunkAction} from "../store";
 
 type CommandOption = {
@@ -9,6 +11,8 @@ type CommandOption = {
 };
 
 export default class Command {
+	public static [immerable] = true as const;
+
 	public id: string;
 	public package: string;
 	public title: string;
