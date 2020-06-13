@@ -5,15 +5,14 @@ import {useEffect} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
-import PaneRenderer from "./components/PaneRenderer";
 import useResetStyles from "./reset-style";
 import {useDispatch} from "./store";
 import {putBuffer} from "./store/buffer";
 import {putCommand, runCommand} from "./store/command";
-import {selectPaneList, putPane} from "./store/pane";
+import {selectPane, selectRootId, patchPane, putPane, putRoot} from "./store/pane";
 import TextBuffer from "./types/buffer/text";
 import Command from "./types/command";
-import Pane from "./types/pane";
+import LeafPane from "./types/pane/leaf";
 
 const useGlobalStyles = createUseStyles({
 	"@global": {
@@ -37,11 +36,14 @@ const App: FunctionComponent = () => {
 	useGlobalStyles();
 
 	const dispatch = useDispatch();
-	const panes = useSelector(selectPaneList);
+
+	const root = useSelector(selectRootId);
 
 	useEffect(() => {
-		// Insert a default pane
-		dispatch(putPane(new Pane()));
+		// Insert a default root pane
+		const pane = new LeafPane();
+		dispatch(putPane(pane));
+		dispatch(putRoot(pane.id));
 		// Insert builtin commands
 		dispatch(putCommand(new Command({
 			id: "buffer/open-file",
@@ -52,15 +54,28 @@ const App: FunctionComponent = () => {
 				// TODO: accept the path from the user input
 				const buffer = await TextBuffer.open("./package.json");
 				dispatch2(putBuffer(buffer));
-				dispatch2(putPane(new Pane(buffer.id)));
+				// TODO: open in the selected pane
+				dispatch2(patchPane(pane.id, (p) => {
+					if (p instanceof LeafPane) {
+						p.buffer.push(buffer.id);
+					} else {
+						// TODO
+					}
+				}));
 			},
 		})));
 		dispatch(runCommand("buffer/open-file"));
 	}, []);
 
-	return (
-		<PaneRenderer panes={panes} />
-	);
+	if (root != null) {
+		const pane = useSelector(selectPane(root));
+
+		const PaneView = pane.View.bind(pane);
+
+		return <PaneView />;
+	} else {
+		return null;
+	}
 };
 
 export default App;
