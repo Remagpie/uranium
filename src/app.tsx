@@ -1,15 +1,16 @@
-import {h} from "preact";
-import type {FunctionComponent} from "preact";
+import {h, Fragment} from "preact";
+import type {ComponentChild, FunctionComponent} from "preact";
 
 import {useEffect} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
+import commandPalleteEffect from "./plugins/command-palette";
 import useResetStyles from "./reset-style";
 import {useDispatch} from "./store";
 import {putBuffer} from "./store/buffer";
 import {putCommand, runCommand} from "./store/command";
-import {selectPane, selectRootId, patchPane, putPane, putRoot} from "./store/pane";
+import {selectPane, selectRootId, selectRootHook, patchPane, putPane, putRoot} from "./store/pane";
 import TextBuffer from "./types/buffer/text";
 import Command from "./types/command";
 import LeafPane from "./types/pane/leaf";
@@ -67,15 +68,20 @@ const App: FunctionComponent = () => {
 		dispatch(runCommand("buffer/open-file"));
 	}, []);
 
+	useEffect(() => commandPalleteEffect(dispatch), []);
+
+	let vnode: ComponentChild;
 	if (root != null) {
 		const pane = useSelector(selectPane(root));
 
-		const PaneView = pane.View.bind(pane);
-
-		return <PaneView />;
+		vnode = h(pane.View.bind(pane), null, null);
 	} else {
-		return null;
+		vnode = null;
 	}
+
+	const rootHook = useSelector(selectRootHook);
+
+	return rootHook.reduce((vn, hook) => hook(vn), h(Fragment, null, vnode));
 };
 
 export default App;

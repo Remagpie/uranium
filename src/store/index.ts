@@ -20,6 +20,8 @@ type Action =
 export type ThunkAction<R> = RawThunkAction<R, State, undefined, Action>;
 export type AsyncThunkAction<R> = ThunkAction<Promise<R>>;
 
+export type Dispatch = ThunkDispatch<State, undefined, Action>;
+
 const reducer = combineReducers({
 	buffer: buffer.reducer,
 	command: command.reducer,
@@ -28,6 +30,6 @@ const reducer = combineReducers({
 
 export default createStore(reducer, applyMiddleware(thunk));
 
-export function useDispatch(): ThunkDispatch<State, undefined, Action> {
+export function useDispatch(): Dispatch {
 	return rawUseDispatch();
 }
