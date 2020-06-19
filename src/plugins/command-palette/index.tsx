@@ -3,18 +3,9 @@ import type {VNode} from "preact";
 
 import {createUseStyles} from "react-jss";
 
+import $ from "../../nuquery";
 import type {Dispatch} from "../../store";
 import {deleteRootHook, putRootHook} from "../../store/pane";
-
-function addChild(vnode: VNode, child: VNode) {
-	if (Array.isArray(vnode.props.children)) {
-		vnode.props.children.push(child);
-	} else if (vnode.props.children == null) {
-		vnode.props.children = child;
-	} else {
-		vnode.props.children = [vnode.props.children, child];
-	}
-}
 
 const useStyles = createUseStyles({
 	root: {
@@ -27,9 +18,7 @@ const useStyles = createUseStyles({
 function rootPaneHook(vnode: VNode): VNode {
 	const styles = useStyles();
 
-	addChild(vnode, <div className={styles.root} />);
-
-	return vnode;
+	return $(vnode).append(<div className={styles.root} />).vnode;
 }
 
 export default function effect(dispatch: Dispatch) {
