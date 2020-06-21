@@ -6,6 +6,7 @@ import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
 import commandPalleteEffect from "./plugins/command-palette";
+import shortcutEffect from "./plugins/shortcut";
 import useResetStyles from "./reset-style";
 import {useDispatch} from "./store";
 import {putBuffer} from "./store/buffer";
@@ -69,6 +70,7 @@ const App: FunctionComponent = () => {
 	}, []);
 
 	useEffect(() => commandPalleteEffect(dispatch), []);
+	useEffect(() => shortcutEffect(dispatch), []);
 
 	let vnode: ComponentChild;
 	if (root != null) {

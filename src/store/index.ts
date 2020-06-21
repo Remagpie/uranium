@@ -6,17 +6,20 @@ import type {ThunkAction as RawThunkAction, ThunkDispatch} from "redux-thunk";
 import * as buffer from "./buffer";
 import * as command from "./command";
 import * as pane from "./pane";
+import * as shortcut from "./shortcut";
 
 export type State = {
 	buffer: buffer.State;
 	command: command.State;
 	pane: pane.State;
+	shortcut: shortcut.State;
 };
 
 type Action =
 	| buffer.Action
 	| command.Action
-	| pane.Action;
+	| pane.Action
+	| shortcut.Action;
 export type ThunkAction<R> = RawThunkAction<R, State, undefined, Action>;
 export type AsyncThunkAction<R> = ThunkAction<Promise<R>>;
 
@@ -26,6 +29,7 @@ const reducer = combineReducers({
 	buffer: buffer.reducer,
 	command: command.reducer,
 	pane: pane.reducer,
+	shortcut: shortcut.reducer,
 });
 
 export default createStore(reducer, applyMiddleware(thunk));
