@@ -9,11 +9,11 @@ import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
 import $ from "../../nuquery";
-import {deleteReducer, putReducer} from "../../store";
-import type {Dispatch, State as RootState} from "../../store";
-import {deleteCommand, putCommand} from "../../store/command";
-import {deleteRootHook, putRootHook} from "../../store/pane";
-import Command from "../../types/command";
+import {deleteReducer, putReducer} from "#store";
+import type {Dispatch, State as RootState} from "#store";
+import {deleteCommand, putCommand} from "#store/command";
+import {deleteRootHook, putRootHook} from "#store/pane";
+import Command from "#types/command";
 
 export type State = {
 	show: boolean;

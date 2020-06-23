@@ -1,6 +1,6 @@
 import {immerable} from "immer";
 
-import type {ThunkAction} from "../store";
+import type {ThunkAction} from "#store";
 
 type CommandOption = {
 	id: string;

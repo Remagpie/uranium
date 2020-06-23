@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
 		"target": "ES2019",
 		"module": "ES2015",
 		"moduleResolution": "Node",
@@ -18,9 +19,13 @@
 		"allowJs": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"paths": {
+			"#components/*": ["src/components/*"],
+			"#store": ["src/store/index"],
+			"#store/*": ["src/store/*"],
+			"#types/*": ["src/types/*"]
+		}
 	},
-	"include": [
-		"src/**/*"
-	]
+	"include": ["src/**/*"]
 }

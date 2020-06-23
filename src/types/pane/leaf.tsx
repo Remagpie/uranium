@@ -3,9 +3,9 @@ import {h} from "preact";
 import {immerable} from "immer";
 import {v4 as uuid} from "uuid";
 
-import LeafPaneView from "../../components/LeafPaneView";
-import {BaseBuffer} from "../buffer/base";
-import {BasePane} from "./base";
+import LeafPaneView from "#components/LeafPaneView";
+import {BaseBuffer} from "#types/buffer/base";
+import {BasePane} from "#types/pane/base";
 
 export default class LeafPane implements BasePane {
 	public static [immerable] = true as const;

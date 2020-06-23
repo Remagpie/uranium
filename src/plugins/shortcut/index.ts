@@ -2,10 +2,10 @@ import produce from "immer";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
-import {deleteReducer, putReducer} from "../../store";
-import type {Dispatch, State as RootState, ThunkAction} from "../../store";
-import {runCommand} from "../../store/command";
-import Command from "../../types/command";
+import {deleteReducer, putReducer} from "#store";
+import type {Dispatch, State as RootState, ThunkAction} from "#store";
+import {runCommand} from "#store/command";
+import Command from "#types/command";
 
 export type State = {
 	[key: string]: Command["id"];

@@ -4,9 +4,9 @@ import type {FunctionComponent, VNode} from "preact";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
-import {selectBuffer} from "../store/buffer";
-import LeafPane from "../types/pane/leaf";
-import EmptyBufferView from "./EmptyBufferView";
+import {selectBuffer} from "#store/buffer";
+import LeafPane from "#types/pane/leaf";
+import EmptyBufferView from "#components/EmptyBufferView";
 
 const useStyles = createUseStyles({
 	root: {

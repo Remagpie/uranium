@@ -5,16 +5,16 @@ import {useEffect} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
+import {useDispatch} from "#store";
+import {putBuffer} from "#store/buffer";
+import {putCommand, runCommand} from "#store/command";
+import {selectPane, selectRootId, selectRootHook, patchPane, putPane, putRoot} from "#store/pane";
+import TextBuffer from "#types/buffer/text";
+import Command from "#types/command";
+import LeafPane from "#types/pane/leaf";
 import commandPalleteEffect from "./plugins/command-palette";
 import shortcutEffect from "./plugins/shortcut";
 import useResetStyles from "./reset-style";
-import {useDispatch} from "./store";
-import {putBuffer} from "./store/buffer";
-import {putCommand, runCommand} from "./store/command";
-import {selectPane, selectRootId, selectRootHook, patchPane, putPane, putRoot} from "./store/pane";
-import TextBuffer from "./types/buffer/text";
-import Command from "./types/command";
-import LeafPane from "./types/pane/leaf";
 
 const useGlobalStyles = createUseStyles({
 	"@global": {

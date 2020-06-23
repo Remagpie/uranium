@@ -11,8 +11,8 @@ import jssNested from "jss-plugin-nested";
 import jssPropsSort from "jss-plugin-props-sort";
 import {Provider} from "react-redux";
 
+import store from "#store";
 import App from "./app";
-import store from "./store";
 
 jss.use(jssGlobal());
 jss.use(jssExtend());

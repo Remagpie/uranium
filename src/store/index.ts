@@ -5,9 +5,9 @@ import type {AnyAction, Reducer} from "redux";
 import thunk from "redux-thunk";
 import type {ThunkAction as RawThunkAction, ThunkDispatch} from "redux-thunk";
 
-import * as buffer from "./buffer";
-import * as command from "./command";
-import * as pane from "./pane";
+import * as buffer from "#store/buffer";
+import * as command from "#store/command";
+import * as pane from "#store/pane";
 
 export type State = {
 	buffer: buffer.State;

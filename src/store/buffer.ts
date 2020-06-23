@@ -2,8 +2,8 @@ import produce from "immer";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
-import type {BaseBuffer} from "../types/buffer/base";
-import type {State as RootState} from "./index";
+import type {State as RootState} from "#store";
+import type {BaseBuffer} from "#types/buffer/base";
 
 export type State = {
 	[id: string]: BaseBuffer;

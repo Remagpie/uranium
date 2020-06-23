@@ -2,8 +2,8 @@ import produce from "immer";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
-import Command from "../types/command";
-import {State as RootState, ThunkAction} from "./index";
+import {State as RootState, ThunkAction} from "#store";
+import Command from "#types/command";
 
 export type State = {
 	[id: string]: Command;

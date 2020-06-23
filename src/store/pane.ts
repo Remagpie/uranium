@@ -4,8 +4,8 @@ import {createSelector} from "reselect";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
-import {BasePane} from "../types/pane/base";
-import {State as RootState, ThunkAction} from "./index";
+import {State as RootState, ThunkAction} from "#store";
+import {BasePane} from "#types/pane/base";
 
 type RootHook = (vnode: VNode) => VNode;
 

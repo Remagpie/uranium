@@ -3,7 +3,7 @@ import type {FunctionComponent} from "preact";
 
 import {createUseStyles} from "react-jss";
 
-import TextBuffer from "../types/buffer/text";
+import TextBuffer from "#types/buffer/text";
 
 const useStyles = createUseStyles({
 	root: {

@@ -34,6 +34,9 @@ module.exports = {
 		alias: {
 			react: "preact/compat",
 			"react-dom": "preact/compat",
+			"#components": path.join(srcDir, "components"),
+			"#store": path.join(srcDir, "store"),
+			"#types": path.join(srcDir, "types")
 		},
 	},
 	plugins: [
