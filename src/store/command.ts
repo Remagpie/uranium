@@ -14,6 +14,7 @@ const initialState: State = {};
 export const selectState = (state: RootState): State => state.command;
 export const selectCommand = (id: string) => (state: RootState) => selectState(state)[id];
 
+export const deleteCommand = createAction("command/delete")<Command["id"]>();
 export const putCommand = createAction("command/put")<Command>();
 
 export function runCommand(id: string): ThunkAction<void> {
@@ -27,9 +28,14 @@ export function runCommand(id: string): ThunkAction<void> {
 }
 
 export type Action =
+	| ActionType<typeof deleteCommand>
 	| ActionType<typeof putCommand>;
 
 export const reducer = createReducer<State, Action>(initialState, {
+	"command/delete": (state, action) => produce(state, (s) => {
+		const id = action.payload;
+		delete s[id];
+	}),
 	"command/put": (state, action) => produce(state, (s) => {
 		const command = action.payload;
 		s[command.id] = command;
