@@ -5,6 +5,7 @@ import {createUseStyles} from "react-jss";
 
 const useStyles = createUseStyles({
 	root: {
+		display: "block",
 		width: "100%",
 		height: "100%",
 	},
@@ -13,7 +14,7 @@ const useStyles = createUseStyles({
 const EmptyBufferView: FunctionComponent = () => {
 	const styles = useStyles();
 
-	return <div className={styles.root} />;
+	return <ubuffer type="empty" className={styles.root} />;
 };
 
 export default EmptyBufferView;

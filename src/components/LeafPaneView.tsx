@@ -10,6 +10,7 @@ import EmptyBufferView from "./EmptyBufferView";
 
 const useStyles = createUseStyles({
 	root: {
+		display: "block",
 		width: "100%",
 		height: "100%",
 	},
@@ -36,7 +37,7 @@ const LeafPaneView: FunctionComponent<Props> = (props) => {
 		view = <BufferView />;
 	}
 
-	return <div className={styles.root}>{view}</div>;
+	return <upane type="leaf" className={styles.root}>{view}</upane>;
 };
 
 export default LeafPaneView;

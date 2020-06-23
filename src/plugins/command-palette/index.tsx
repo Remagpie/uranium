@@ -9,6 +9,7 @@ import {deleteRootHook, putRootHook} from "../../store/pane";
 
 const useStyles = createUseStyles({
 	root: {
+		display: "block",
 		position: "absolute",
 		width: 100,
 		height: 100,
@@ -18,7 +19,7 @@ const useStyles = createUseStyles({
 function rootPaneHook(vnode: VNode): VNode {
 	const styles = useStyles();
 
-	return $(vnode).append(<div className={styles.root} />).vnode;
+	return $(vnode).append(<upalette className={styles.root} />).vnode;
 }
 
 export default function effect(dispatch: Dispatch) {

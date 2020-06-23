@@ -7,6 +7,7 @@ import TextBuffer from "../types/buffer/text";
 
 const useStyles = createUseStyles({
 	root: {
+		display: "block",
 		width: "100%",
 		height: "100%",
 	},
@@ -22,9 +23,9 @@ const TextBufferView: FunctionComponent<Props> = (props) => {
 	const styles = useStyles();
 
 	return (
-		<textarea className={styles.root}>
+		<ubuffer type="text" className={styles.root}>
 			{buffer.content}
-		</textarea>
+		</ubuffer>
 	);
 };
 
