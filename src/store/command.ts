@@ -21,7 +21,9 @@ export function runCommand(id: string): ThunkAction<void> {
 	return (dispatch, getState) => {
 		const state = getState();
 		const command = selectCommand(id)(state);
-
+		document.activeElement?.dispatchEvent(new CustomEvent("command", {
+			detail: id,
+		}));
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return dispatch(command.thunk);
 	};
