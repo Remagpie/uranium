@@ -22,7 +22,7 @@ export const putBinding = createAction("shortcut/binding/put")<{
 	command: Command["id"];
 }>();
 
-export function enterKey(code: string): ThunkAction<void> {
+export function enterKey(code: string): ThunkAction<boolean> {
 	return (dispatch, getState) => {
 		const state = getState();
 		const command = selectBinding(code)(state);
@@ -30,6 +30,8 @@ export function enterKey(code: string): ThunkAction<void> {
 		if (command != null) {
 			dispatch(runCommand(command));
 		}
+
+		return command != null;
 	};
 }
 
@@ -47,10 +49,12 @@ export default function effect(dispatch: Dispatch) {
 	dispatch(putReducer("shortcut", reducer));
 
 	const onKeyDown = (event: KeyboardEvent) => {
-		dispatch(enterKey(event.code));
-		event.stopImmediatePropagation();
+		const matched = dispatch(enterKey(event.code));
+		if (matched) {
+			event.stopImmediatePropagation();
+		}
 	};
-	document.addEventListener("keydown", onKeyDown);
+	document.addEventListener("keydown", onKeyDown, true);
 
 	return function () {
 		document.removeEventListener("keydown", onKeyDown);
