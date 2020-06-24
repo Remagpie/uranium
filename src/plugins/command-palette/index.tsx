@@ -2,7 +2,6 @@ import {h} from "preact";
 import type {VNode} from "preact";
 
 import produce from "immer";
-import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 import {createSelector} from "reselect";
 import {createAction, createReducer} from "typesafe-actions";
@@ -14,6 +13,7 @@ import type {Dispatch, State as RootState} from "#store";
 import {deleteCommand, putCommand} from "#store/command";
 import {deleteRootHook, putRootHook} from "#store/pane";
 import Command from "#types/command";
+import CommandPalette from "./components/CommandPalette";
 
 export type State = {
 	show: boolean;
@@ -44,15 +44,6 @@ const reducer = createReducer<State, Action>(initialState, {
 	}),
 });
 
-const useStyles = createUseStyles({
-	root: {
-		display: "block",
-		position: "absolute",
-		width: 100,
-		height: 100,
-	},
-});
-
 const toggleCommand = new Command({
 	id: "command-palette/toggle",
 	package: "command-palette",
@@ -62,11 +53,10 @@ const toggleCommand = new Command({
 });
 
 function rootPaneHook(vnode: VNode): VNode {
-	const styles = useStyles();
 	const show = useSelector(selectShow);
 
 	if (show) {
-		return $(vnode).append(<upalette className={styles.root} />).vnode;
+		return $(vnode).append(<CommandPalette />).vnode;
 	} else {
 		return vnode;
 	}

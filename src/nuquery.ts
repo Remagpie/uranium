@@ -24,3 +24,7 @@ class UrQuery {
 export default function $(vnode: VNode): UrQuery {
 	return new UrQuery(vnode);
 }
+
+export function mergeClass(...classNames: Array<string | undefined>) {
+	return classNames.filter((c) => c != null).join(" ");
+}

@@ -11,5 +11,18 @@ export default createUseStyles({
 			height: "100%",
 			margin: 0,
 		},
+		input: {
+			margin: 0,
+			padding: 0,
+			border: "none",
+
+			"&:focus": {
+				outline: "none",
+			},
+		},
+
+		":focus": {
+			outline: "none",
+		},
 	},
 });
