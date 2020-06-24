@@ -7,7 +7,7 @@ type CommandOption = {
 	package: string;
 	title: string;
 	description: string;
-	thunk: ThunkAction<any>;
+	action: ThunkAction<any>;
 };
 
 export default class Command {
@@ -17,13 +17,13 @@ export default class Command {
 	public package: string;
 	public title: string;
 	public description: string;
-	public thunk: ThunkAction<any>;
+	public action: CommandOption["action"];
 
 	public constructor(options: CommandOption) {
 		this.id = options.id;
 		this.package = options.package;
 		this.title = options.title;
 		this.description = options.description;
-		this.thunk = options.thunk;
+		this.action = options.action;
 	}
 }

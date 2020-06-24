@@ -58,7 +58,7 @@ const toggleCommand = new Command({
 	package: "command-palette",
 	title: "Command Palette: Toggle",
 	description: "",
-	thunk: (dispatch) => dispatch(toggleShow()),
+	action: (dispatch) => dispatch(toggleShow()),
 });
 
 function rootPaneHook(vnode: VNode): VNode {

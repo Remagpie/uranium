@@ -25,7 +25,7 @@ export function runCommand(id: string): ThunkAction<void> {
 			detail: id,
 		}));
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-		return dispatch(command.thunk);
+		return dispatch(command.action);
 	};
 }
 

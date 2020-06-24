@@ -53,7 +53,7 @@ const App: FunctionComponent = () => {
 			package: "buffer",
 			title: "Open a file",
 			description: "",
-			thunk: async (dispatch2) => {
+			action: async (dispatch2) => {
 				// TODO: accept the path from the user input
 				const buffer = await TextBuffer.open("./package.json");
 				dispatch2(putBuffer(buffer));
