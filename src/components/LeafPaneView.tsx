@@ -30,7 +30,7 @@ const LeafPaneView: FunctionComponent<Props> = (props) => {
 		view = <EmptyBufferView />;
 	} else {
 		// TODO: Show the active buffer
-		const buffer = useSelector(selectBuffer(pane.buffer[0]));
+		const buffer = useSelector(selectBuffer(pane.buffer[0]))!;
 
 		const BufferView = buffer.View.bind(buffer);
 

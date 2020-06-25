@@ -75,7 +75,7 @@ const App: FunctionComponent = () => {
 
 	let vnode: ComponentChild;
 	if (root != null) {
-		const pane = useSelector(selectPane(root));
+		const pane = useSelector(selectPane(root))!;
 
 		vnode = h(pane.View.bind(pane), null, null);
 	} else {

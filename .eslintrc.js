@@ -165,6 +165,7 @@ module.exports = {
 		"@typescript-eslint/no-throw-literal": "error",
 		"@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
 		"@typescript-eslint/no-unnecessary-qualifier": "error",
+		"@typescript-eslint/no-unsafe-assignment": "off",
 		"@typescript-eslint/no-unused-expressions": "error",
 		"@typescript-eslint/no-use-before-define": "off", // Typescript
 		"@typescript-eslint/restrict-template-expressions": ["error", {

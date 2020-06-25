@@ -1,6 +1,7 @@
 import {h, render} from "preact";
 import type {FunctionComponent} from "preact";
 
+import * as immer from "immer";
 import jss from "jss";
 import jssCamelCase from "jss-plugin-camel-case";
 import jssDefaultUnit from "jss-plugin-default-unit";
@@ -13,6 +14,8 @@ import {Provider} from "react-redux";
 
 import store from "#store";
 import App from "./app";
+
+immer.enableMapSet();
 
 jss.use(jssGlobal());
 jss.use(jssExtend());
