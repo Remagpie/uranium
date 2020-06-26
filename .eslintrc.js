@@ -44,7 +44,6 @@ module.exports = {
 		"no-bitwise": "error",
 		"no-caller": "error",
 		"no-class-assign": "off", // Typescript
-		"no-confusing-arrow": "error",
 		"no-console": "error",
 		"no-const-assign": "off", // Typescript
 		"no-constant-condition": "off", // @typescript-eslint/no-unnecessary-condition

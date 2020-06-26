@@ -13,7 +13,7 @@ import TextBuffer from "#types/buffer/text";
 import Command from "#types/command";
 import LeafPane from "#types/pane/leaf";
 import commandPalleteEffect from "./plugins/command-palette";
-import shortcutEffect from "./plugins/shortcut";
+import keymapEffect from "./plugins/keymap";
 import useResetStyles from "./reset-style";
 
 const useGlobalStyles = createUseStyles({
@@ -71,7 +71,7 @@ const App: FunctionComponent = () => {
 	}, []);
 
 	useEffect(() => commandPalleteEffect(dispatch), []);
-	useEffect(() => shortcutEffect(dispatch), []);
+	useEffect(() => keymapEffect(dispatch), []);
 
 	let vnode: ComponentChild;
 	if (root != null) {

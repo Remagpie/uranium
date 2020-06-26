@@ -3,10 +3,10 @@ import type {Dispatch} from "#store";
 import * as store from "./store";
 
 export default function effect(dispatch: Dispatch) {
-	dispatch(putReducer("shortcut", store.reducer));
+	dispatch(putReducer("keymap", store.reducer));
 
 	const onKeyDown = (event: KeyboardEvent) => {
-		const matched = dispatch(store.enterKey(event.code));
+		const matched = dispatch(store.applyEvent(event));
 		if (matched) {
 			event.stopImmediatePropagation();
 		}
@@ -15,6 +15,6 @@ export default function effect(dispatch: Dispatch) {
 
 	return function () {
 		document.removeEventListener("keydown", onKeyDown);
-		deleteReducer("shortcut");
+		deleteReducer("keymap");
 	};
 }
