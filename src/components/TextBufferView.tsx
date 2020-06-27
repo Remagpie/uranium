@@ -28,5 +28,6 @@ const TextBufferView: FunctionComponent<Props> = (props) => {
 		</ubuffer>
 	);
 };
+TextBufferView.displayName = "TextBufferView";
 
 export default TextBufferView;

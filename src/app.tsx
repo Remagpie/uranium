@@ -96,5 +96,6 @@ const App: FunctionComponent = () => {
 
 	return vnode;
 };
+App.displayName = "App";
 
 export default App;

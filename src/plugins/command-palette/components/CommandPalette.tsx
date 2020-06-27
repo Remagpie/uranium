@@ -54,5 +54,6 @@ const CommandPalette: FunctionComponent = () => {
 		</upalette>
 	);
 };
+CommandPalette.displayName = "CommandPalette";
 
 export default CommandPalette;

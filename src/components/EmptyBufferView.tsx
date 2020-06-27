@@ -16,5 +16,6 @@ const EmptyBufferView: FunctionComponent = () => {
 
 	return <ubuffer type="empty" className={styles.root} />;
 };
+EmptyBufferView.displayName = "EmptyBufferView";
 
 export default EmptyBufferView;

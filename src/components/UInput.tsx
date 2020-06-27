@@ -30,5 +30,6 @@ const UInput: FunctionComponent<Props> = (props) => {
 		/>
 	);
 };
+UInput.displayName = "UInput";
 
 export default UInput;

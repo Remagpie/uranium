@@ -30,5 +30,6 @@ const Root: FunctionComponent = () => (
 		<App />
 	</Provider>
 );
+Root.displayName = "Root";
 
 render(<Root />, document.getElementById("root")!);

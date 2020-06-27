@@ -39,5 +39,6 @@ const LeafPaneView: FunctionComponent<Props> = (props) => {
 
 	return <upane type="leaf" className={styles.root}>{view}</upane>;
 };
+LeafPaneView.displayName = "LeafPaneView";
 
 export default LeafPaneView;
