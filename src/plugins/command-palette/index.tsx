@@ -20,13 +20,11 @@ const toggleCommand = new Command({
 	action: (dispatch) => dispatch(store.toggleShow()),
 });
 
-function rootPaneHook(vnode: VNode): VNode {
+function rootPaneHook(vnode: VNode) {
 	const show = useSelector(store.selectShow);
 
 	if (show) {
-		return $(vnode).append(<CommandPalette />).vnode;
-	} else {
-		return vnode;
+		$(vnode).append(<CommandPalette />);
 	}
 }
 

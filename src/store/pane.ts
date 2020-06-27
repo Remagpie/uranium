@@ -7,7 +7,7 @@ import type {ActionType} from "typesafe-actions";
 import {State as RootState, ThunkAction} from "#store";
 import {BasePane} from "#types/pane/base";
 
-type RootHook = (vnode: VNode) => VNode;
+type RootHook = (vnode: VNode) => any;
 
 export type State = {
 	root: BasePane["id"] | null;

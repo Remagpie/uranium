@@ -73,18 +73,21 @@ const App: FunctionComponent = () => {
 	useEffect(() => commandPalleteEffect(dispatch), []);
 	useEffect(() => keymapEffect(dispatch), []);
 
-	let vnode: ComponentChild;
+	let paneNode: ComponentChild;
 	if (root != null) {
 		const pane = useSelector(selectPane(root))!;
 
-		vnode = h(pane.View.bind(pane), null, null);
+		paneNode = h(pane.View.bind(pane), null, null);
 	} else {
-		vnode = null;
+		paneNode = null;
 	}
 
 	const rootHook = useSelector(selectRootHook);
+	const vnode = <Fragment>{paneNode}</Fragment>;
 
-	return rootHook.reduce((vn, hook) => hook(vn), h(Fragment, null, vnode));
+	rootHook.forEach((hook) => { hook(vnode); });
+
+	return vnode;
 };
 
 export default App;
