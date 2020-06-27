@@ -5,6 +5,9 @@ import {useCallback, useState} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 
 import UInput from "#components/UInput";
+import {useDispatch} from "#store";
+import {runCommand} from "#store/command";
+import {putShow} from "../store";
 
 const useStyles = createUseStyles({
 	root: {
@@ -21,18 +24,34 @@ const useStyles = createUseStyles({
 });
 
 const CommandPalette: FunctionComponent = () => {
+	const dispatch = useDispatch();
 	const styles = useStyles();
 
 	const [text, setText] = useState("");
+
+	const ref = useCallback((element: HTMLDivElement | null) => {
+		element?.addEventListener("command", (event) => {
+			if (!(event instanceof CustomEvent && typeof event.detail === "string")) {
+				return;
+			}
+			switch (event.detail) {
+				case "core/confirm": {
+					dispatch(putShow(false));
+					dispatch(runCommand(text));
+					break;
+				}
+			}
+		});
+	}, [text]);
 
 	const onInput = useCallback((event: h.JSX.TargetedEvent<HTMLInputElement>) => {
 		setText(event.currentTarget.value);
 	}, []);
 
 	return (
-		<div className={styles.root}>
+		<upalette ref={ref} className={styles.root}>
 			<UInput className={styles.input} value={text} onInput={onInput} />
-		</div>
+		</upalette>
 	);
 };
 

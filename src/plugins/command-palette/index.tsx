@@ -9,6 +9,7 @@ import type {Dispatch} from "#store";
 import {deleteCommand, putCommand} from "#store/command";
 import {deleteRootHook, putRootHook} from "#store/pane";
 import Command from "#types/command";
+import {deleteKeymapGroup, putKeymap} from "../keymap/store";
 import CommandPalette from "./components/CommandPalette";
 import * as store from "./store";
 
@@ -32,8 +33,15 @@ export default function effect(dispatch: Dispatch) {
 	dispatch(putReducer("command-palette", store.reducer));
 	dispatch(putCommand(toggleCommand));
 	dispatch(putRootHook(rootPaneHook));
+	dispatch(putKeymap({
+		group: "command-palette",
+		key: ["S-C-p"],
+		selector: "body",
+		command: toggleCommand.id,
+	}));
 
 	return function () {
+		dispatch(deleteKeymapGroup("command-palette"));
 		dispatch(deleteRootHook(rootPaneHook));
 		dispatch(deleteCommand(toggleCommand.id));
 		dispatch(deleteReducer("command-palette"));

@@ -33,6 +33,7 @@ export function runCommand(id: string): ThunkAction<any> {
 		}
 
 		document.activeElement?.dispatchEvent(new CustomEvent("command", {
+			bubbles: true,
 			detail: id,
 		}));
 		// eslint-disable-next-line consistent-return, @typescript-eslint/no-unsafe-return

@@ -49,6 +49,13 @@ const App: FunctionComponent = () => {
 		dispatch(putRoot(pane.id));
 		// Insert builtin commands
 		dispatch(putCommand(new Command({
+			id: "core/confirm",
+			package: "core",
+			title: "Confirm",
+			description: "",
+			action: () => { /* Do nothing */ },
+		})));
+		dispatch(putCommand(new Command({
 			id: "buffer/open-file",
 			package: "buffer",
 			title: "Open a file",
@@ -70,8 +77,8 @@ const App: FunctionComponent = () => {
 		dispatch(runCommand("buffer/open-file"));
 	}, []);
 
-	useEffect(() => commandPalleteEffect(dispatch), []);
 	useEffect(() => keymapEffect(dispatch), []);
+	useEffect(() => commandPalleteEffect(dispatch), []);
 
 	let paneNode: ComponentChild;
 	if (root != null) {
