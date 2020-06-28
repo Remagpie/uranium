@@ -3,27 +3,27 @@ import type {FunctionComponent} from "preact";
 
 import {createUseStyles} from "react-jss";
 
+import {mergeClass} from "../nuquery";
 import TextBuffer from "#types/buffer/text";
 
 const useStyles = createUseStyles({
 	root: {
 		display: "block",
-		width: "100%",
-		height: "100%",
 	},
 });
 
 type Props = {
+	className?: string;
 	buffer: TextBuffer;
 };
 
 const TextBufferView: FunctionComponent<Props> = (props) => {
-	const {buffer} = props;
+	const {buffer, className} = props;
 
 	const styles = useStyles();
 
 	return (
-		<ubuffer type="text" className={styles.root}>
+		<ubuffer type="text" className={mergeClass(styles.root, className)}>
 			{buffer.content}
 		</ubuffer>
 	);

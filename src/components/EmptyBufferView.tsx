@@ -3,18 +3,24 @@ import type {FunctionComponent} from "preact";
 
 import {createUseStyles} from "react-jss";
 
+import {mergeClass} from "../nuquery";
+
 const useStyles = createUseStyles({
 	root: {
 		display: "block",
-		width: "100%",
-		height: "100%",
 	},
 });
 
-const EmptyBufferView: FunctionComponent = () => {
+type Props = {
+	className?: string;
+};
+
+const EmptyBufferView: FunctionComponent<Props> = (props) => {
+	const {className} = props;
+
 	const styles = useStyles();
 
-	return <ubuffer type="empty" className={styles.root} />;
+	return <ubuffer type="empty" className={mergeClass(styles.root, className)} />;
 };
 EmptyBufferView.displayName = "EmptyBufferView";
 

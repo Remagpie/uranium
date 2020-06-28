@@ -11,6 +11,11 @@ export default createUseStyles({
 			height: "100%",
 			margin: 0,
 		},
+		"#root": {
+			display: "block",
+			width: "100%",
+			height: "100%",
+		},
 		input: {
 			margin: 0,
 			padding: 0,

@@ -1,5 +1,5 @@
-import {h, Fragment} from "preact";
-import type {ComponentChild, FunctionComponent} from "preact";
+import {h} from "preact";
+import type {FunctionComponent} from "preact";
 
 import {useEffect} from "preact/hooks";
 import {createUseStyles} from "react-jss";
@@ -16,31 +16,21 @@ import commandPalleteEffect from "./plugins/command-palette";
 import keymapEffect from "./plugins/keymap";
 import useResetStyles from "./reset-style";
 
-const useGlobalStyles = createUseStyles({
-	"@global": {
-		html: {
-			width: "100%",
-			height: "100%",
-		},
-		body: {
-			width: "100%",
-			height: "100%",
-		},
-		"#root": {
-			display: "block",
-			width: "100%",
-			height: "100%",
-		},
+const useStyles = createUseStyles({
+	root: {
+		width: "100%",
+		height: "100%",
 	},
 });
 
 const App: FunctionComponent = () => {
 	useResetStyles();
-	useGlobalStyles();
 
+	const styles = useStyles();
 	const dispatch = useDispatch();
 
 	const root = useSelector(selectRootId);
+	const rootHook = useSelector(selectRootHook);
 
 	useEffect(() => {
 		// Insert a default root pane
@@ -80,18 +70,14 @@ const App: FunctionComponent = () => {
 	useEffect(() => keymapEffect(dispatch), []);
 	useEffect(() => commandPalleteEffect(dispatch), []);
 
-	let paneNode: ComponentChild;
-	if (root != null) {
-		const pane = useSelector(selectPane(root))!;
-
-		paneNode = h(pane.View.bind(pane), null, null);
-	} else {
-		paneNode = null;
+	if (root == null) {
+		return null;
 	}
 
-	const rootHook = useSelector(selectRootHook);
-	const vnode = <Fragment>{paneNode}</Fragment>;
+	const pane = useSelector(selectPane(root))!;
+	const PaneView = pane.View.bind(pane);
 
+	const vnode = <PaneView className={styles.root} />;
 	rootHook.forEach((hook) => { hook(vnode); });
 
 	return vnode;

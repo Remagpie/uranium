@@ -1,4 +1,5 @@
 import {h} from "preact";
+import type {ComponentProps} from "preact";
 
 import {promises as fs} from "fs";
 import {immerable} from "immer";
@@ -31,7 +32,9 @@ export default class TextBuffer implements BaseBuffer {
 		this.View = this.View.bind(this);
 	}
 
-	public View() {
-		return <TextBufferView buffer={this} />;
+	public View(props: ComponentProps<BaseBuffer["View"]>) {
+		const {className} = props;
+
+		return <TextBufferView className={className} buffer={this} />;
 	}
 }

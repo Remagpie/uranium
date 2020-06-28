@@ -1,4 +1,5 @@
 import {h} from "preact";
+import type {ComponentProps} from "preact";
 
 import {immerable} from "immer";
 import {v4 as uuid} from "uuid";
@@ -20,7 +21,9 @@ export default class LeafPane implements BasePane {
 		this.children = [];
 	}
 
-	public View() {
-		return <LeafPaneView pane={this} />;
+	public View(props: ComponentProps<BasePane["View"]>) {
+		const {className} = props;
+
+		return <LeafPaneView className={className} pane={this} />;
 	}
 }
