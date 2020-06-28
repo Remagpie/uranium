@@ -11,14 +11,8 @@ class UrQuery {
 	public append(child: VNode): UrQuery {
 		this.vnode.forEach((vn) => {
 			if (typeof vn.type === "string") {
-				const children = vn.props.children;
-				if (Array.isArray(children)) {
-					children.push(child);
-				} else if (children == null) {
-					vn.props.children = child;
-				} else {
-					vn.props.children = [children, child];
-				}
+				const children = toChildArray(vn.props.children);
+				vn.props.children = [...children, child];
 			} else {
 				if (vn.__k == null) {
 					vn.__k = [];
@@ -33,14 +27,8 @@ class UrQuery {
 	public prepend(child: VNode): UrQuery {
 		this.vnode.forEach((vn) => {
 			if (typeof vn.type === "string") {
-				const children = vn.props.children;
-				if (Array.isArray(children)) {
-					children.unshift(child);
-				} else if (children == null) {
-					vn.props.children = child;
-				} else {
-					vn.props.children = [child, children];
-				}
+				const children = toChildArray(vn.props.children);
+				vn.props.children = [child, ...children];
 			} else {
 				if (vn.__k == null) {
 					vn.__k = [];
