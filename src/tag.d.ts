@@ -6,6 +6,7 @@ declare module preact {
 			ubuffer: IntrinsicElements["div"];
 			upalette: IntrinsicElements["div"];
 			upane: IntrinsicElements["div"];
+			utabbar: IntrinsicElements["div"];
 		}
 	}
 }

@@ -14,6 +14,7 @@ import Command from "#types/command";
 import LeafPane from "#types/pane/leaf";
 import commandPalleteEffect from "./plugins/command-palette";
 import keymapEffect from "./plugins/keymap";
+import tabbarEffect from "./plugins/tabbar";
 import useResetStyles from "./reset-style";
 
 const useStyles = createUseStyles({
@@ -69,6 +70,7 @@ const App: FunctionComponent = () => {
 
 	useEffect(() => keymapEffect(dispatch), []);
 	useEffect(() => commandPalleteEffect(dispatch), []);
+	useEffect(() => tabbarEffect(dispatch), []);
 
 	if (root == null) {
 		return null;

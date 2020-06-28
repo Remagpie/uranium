@@ -25,6 +25,9 @@ export default createUseStyles({
 				outline: "none",
 			},
 		},
+		li: {
+			listStyle: "none",
+		},
 
 		":focus": {
 			outline: "none",

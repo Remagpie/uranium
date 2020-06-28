@@ -6,12 +6,14 @@ import {useSelector} from "react-redux";
 
 import {mergeClass} from "../nuquery";
 import {selectBuffer} from "#store/buffer";
+import {selectLeafHook} from "#store/pane";
 import LeafPane from "#types/pane/leaf";
 import EmptyBufferView from "#components/EmptyBufferView";
 
 const useStyles = createUseStyles({
 	root: {
 		display: "flex",
+		flexDirection: "column",
 	},
 	buffer: {
 		flex: [1, 1, "auto"],
@@ -28,23 +30,28 @@ const LeafPaneView: FunctionComponent<Props> = (props) => {
 
 	const styles = useStyles();
 
-	let view: VNode;
+	const leafHook = useSelector(selectLeafHook);
+
+	let bufferNode: VNode;
 	if (pane.buffer.length === 0) {
-		view = <EmptyBufferView className={styles.buffer} />;
+		bufferNode = <EmptyBufferView className={styles.buffer} />;
 	} else {
 		// TODO: Show the active buffer
 		const buffer = useSelector(selectBuffer(pane.buffer[0]))!;
 
 		const BufferView = buffer.View.bind(buffer);
 
-		view = <BufferView className={styles.buffer} />;
+		bufferNode = <BufferView className={styles.buffer} />;
 	}
 
-	return (
+	const vnode = (
 		<upane type="leaf" className={mergeClass(styles.root, className)}>
-			{view}
+			{bufferNode}
 		</upane>
 	);
+	leafHook.forEach((hook) => { hook(vnode, pane); });
+
+	return vnode;
 };
 LeafPaneView.displayName = "LeafPaneView";
 

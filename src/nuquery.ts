@@ -30,6 +30,28 @@ class UrQuery {
 		return this;
 	}
 
+	public prepend(child: VNode): UrQuery {
+		this.vnode.forEach((vn) => {
+			if (typeof vn.type === "string") {
+				const children = vn.props.children;
+				if (Array.isArray(children)) {
+					children.unshift(child);
+				} else if (children == null) {
+					vn.props.children = child;
+				} else {
+					vn.props.children = [child, children];
+				}
+			} else {
+				if (vn.__k == null) {
+					vn.__k = [];
+				}
+				vn.__k.unshift(child);
+			}
+		});
+
+		return this;
+	}
+
 	// TODO: Implement complex selector
 	//       Current implementation only checks the type
 	public find(selector: string): UrQuery {
