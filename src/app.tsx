@@ -11,7 +11,7 @@ import {putCommand, runCommand} from "#store/command";
 import {selectPane, selectRootId, selectRootHook, patchPane, putPane, putRoot} from "#store/pane";
 import TextBuffer from "#types/buffer/text";
 import Command from "#types/command";
-import LeafPane from "#types/pane/leaf";
+import BufferPane from "#types/pane/buffer";
 import commandPalleteEffect from "./plugins/command-palette";
 import keymapEffect from "./plugins/keymap";
 import tabbarEffect from "./plugins/tabbar";
@@ -35,7 +35,7 @@ const App: FunctionComponent = () => {
 
 	useEffect(() => {
 		// Insert a default root pane
-		const pane = new LeafPane();
+		const pane = new BufferPane();
 		dispatch(putPane(pane));
 		dispatch(putRoot(pane.id));
 		// Insert builtin commands
@@ -57,7 +57,7 @@ const App: FunctionComponent = () => {
 				dispatch2(putBuffer(buffer));
 				// TODO: open in the selected pane
 				dispatch2(patchPane(pane.id, (p) => {
-					if (p instanceof LeafPane) {
+					if (p instanceof BufferPane) {
 						p.buffer.push(buffer.id);
 					} else {
 						// TODO

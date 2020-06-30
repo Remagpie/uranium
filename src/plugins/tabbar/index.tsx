@@ -5,8 +5,8 @@ import {createUseStyles} from "react-jss";
 
 import $ from "../../nuquery";
 import type {Dispatch} from "#store";
-import {deleteLeafHook, putLeafHook} from "#store/pane";
-import LeafPane from "#types/pane/leaf";
+import {deleteBufferHook, putBufferHook} from "#store/pane";
+import BufferPane from "#types/pane/buffer";
 import Tabbar from "./components/Tabbar";
 
 const useStyles = createUseStyles({
@@ -15,16 +15,16 @@ const useStyles = createUseStyles({
 	},
 });
 
-function leafPaneHook(vnode: VNode, pane: LeafPane) {
+function bufferPaneHook(vnode: VNode, pane: BufferPane) {
 	const styles = useStyles();
 
 	$(vnode).find("upane").prepend(<Tabbar className={styles.root} pane={pane} />);
 }
 
 export default function effect(dispatch: Dispatch) {
-	dispatch(putLeafHook(leafPaneHook));
+	dispatch(putBufferHook(bufferPaneHook));
 
 	return function () {
-		dispatch(deleteLeafHook(leafPaneHook));
+		dispatch(deleteBufferHook(bufferPaneHook));
 	};
 }

@@ -4,11 +4,11 @@ import type {ComponentProps} from "preact";
 import {immerable} from "immer";
 import {v4 as uuid} from "uuid";
 
-import LeafPaneView from "#components/LeafPaneView";
+import BufferPaneView from "#components/BufferPaneView";
 import {BaseBuffer} from "#types/buffer/base";
 import {BasePane} from "#types/pane/base";
 
-export default class LeafPane implements BasePane {
+export default class BufferPane implements BasePane {
 	public static [immerable] = true as const;
 
 	public id: string;
@@ -24,6 +24,6 @@ export default class LeafPane implements BasePane {
 	public View(props: ComponentProps<BasePane["View"]>) {
 		const {className} = props;
 
-		return <LeafPaneView className={className} pane={this} />;
+		return <BufferPaneView className={className} pane={this} />;
 	}
 }

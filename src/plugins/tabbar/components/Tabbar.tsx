@@ -4,7 +4,7 @@ import type {FunctionComponent} from "preact";
 import {createUseStyles} from "react-jss";
 
 import {mergeClass} from "../../../nuquery";
-import LeafPane from "#types/pane/leaf";
+import BufferPane from "#types/pane/buffer";
 
 const useStyles = createUseStyles({
 	root: {
@@ -22,7 +22,7 @@ const useStyles = createUseStyles({
 
 type Props = {
 	className?: string;
-	pane: LeafPane;
+	pane: BufferPane;
 };
 
 const Tabbar: FunctionComponent<Props> = (props) => {

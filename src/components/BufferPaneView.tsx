@@ -6,8 +6,8 @@ import {useSelector} from "react-redux";
 
 import {mergeClass} from "../nuquery";
 import {selectBuffer} from "#store/buffer";
-import {selectLeafHook} from "#store/pane";
-import LeafPane from "#types/pane/leaf";
+import {selectBufferHook} from "#store/pane";
+import BufferPane from "#types/pane/buffer";
 import EmptyBufferView from "#components/EmptyBufferView";
 
 const useStyles = createUseStyles({
@@ -22,15 +22,15 @@ const useStyles = createUseStyles({
 
 type Props = {
 	className?: string;
-	pane: LeafPane;
+	pane: BufferPane;
 };
 
-const LeafPaneView: FunctionComponent<Props> = (props) => {
+const BufferPaneView: FunctionComponent<Props> = (props) => {
 	const {className, pane} = props;
 
 	const styles = useStyles();
 
-	const leafHook = useSelector(selectLeafHook);
+	const hookList = useSelector(selectBufferHook);
 
 	let bufferNode: VNode;
 	if (pane.buffer.length === 0) {
@@ -45,14 +45,14 @@ const LeafPaneView: FunctionComponent<Props> = (props) => {
 	}
 
 	const vnode = (
-		<upane type="leaf" className={mergeClass(styles.root, className)}>
+		<upane type="buffer" className={mergeClass(styles.root, className)}>
 			{bufferNode}
 		</upane>
 	);
-	leafHook.forEach((hook) => { hook(vnode, pane); });
+	hookList.forEach((hook) => { hook(vnode, pane); });
 
 	return vnode;
 };
-LeafPaneView.displayName = "LeafPaneView";
+BufferPaneView.displayName = "BufferPaneView";
 
-export default LeafPaneView;
+export default BufferPaneView;
