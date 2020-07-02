@@ -6,9 +6,7 @@ import {useSelector} from "react-redux";
 
 import {mergeClass} from "../nuquery";
 import {selectBuffer} from "#store/buffer";
-import {selectBufferHook} from "#store/pane";
 import BufferPane from "#types/pane/buffer";
-import EmptyBufferView from "#components/EmptyBufferView";
 
 const useStyles = createUseStyles({
 	root: {
@@ -30,28 +28,19 @@ const BufferPaneView: FunctionComponent<Props> = (props) => {
 
 	const styles = useStyles();
 
-	const hookList = useSelector(selectBufferHook);
-
-	let bufferNode: VNode;
-	if (pane.buffer.length === 0) {
-		bufferNode = <EmptyBufferView className={styles.buffer} />;
-	} else {
-		// TODO: Show the active buffer
-		const buffer = useSelector(selectBuffer(pane.buffer[0]))!;
-
+	const buffer = useSelector(selectBuffer(pane.buffer));
+	let bufferNode: VNode | undefined;
+	if (buffer != null) {
 		const BufferView = buffer.View.bind(buffer);
 
 		bufferNode = <BufferView className={styles.buffer} />;
 	}
 
-	const vnode = (
+	return (
 		<upane type="buffer" className={mergeClass(styles.root, className)}>
 			{bufferNode}
 		</upane>
 	);
-	hookList.forEach((hook) => { hook(vnode, pane); });
-
-	return vnode;
 };
 BufferPaneView.displayName = "BufferPaneView";
 

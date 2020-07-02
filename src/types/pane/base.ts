@@ -2,6 +2,6 @@ import type {FunctionComponent} from "preact";
 
 export type BasePane = {
 	id: string;
-	children: BasePane[];
+	children: BasePane["id"][];
 	View: FunctionComponent<{className?: string}>;
 };

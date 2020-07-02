@@ -12,9 +12,9 @@ import {selectPane, selectRootId, selectRootHook, patchPane, putPane, putRoot} f
 import TextBuffer from "#types/buffer/text";
 import Command from "#types/command";
 import BufferPane from "#types/pane/buffer";
+import TabPane from "#types/pane/tab";
 import commandPalleteEffect from "./plugins/command-palette";
 import keymapEffect from "./plugins/keymap";
-import tabbarEffect from "./plugins/tabbar";
 import useResetStyles from "./reset-style";
 
 const useStyles = createUseStyles({
@@ -35,7 +35,7 @@ const App: FunctionComponent = () => {
 
 	useEffect(() => {
 		// Insert a default root pane
-		const pane = new BufferPane();
+		const pane = new TabPane();
 		dispatch(putPane(pane));
 		dispatch(putRoot(pane.id));
 		// Insert builtin commands
@@ -55,13 +55,13 @@ const App: FunctionComponent = () => {
 				// TODO: accept the path from the user input
 				const buffer = await TextBuffer.open("./package.json");
 				dispatch2(putBuffer(buffer));
+
+				const bufferPane = new BufferPane(buffer.id);
+				dispatch2(putPane(bufferPane));
 				// TODO: open in the selected pane
 				dispatch2(patchPane(pane.id, (p) => {
-					if (p instanceof BufferPane) {
-						p.buffer.push(buffer.id);
-					} else {
-						// TODO
-					}
+					p.children.push(bufferPane.id);
+					(p as TabPane).active = bufferPane.id;
 				}));
 			},
 		})));
@@ -70,7 +70,6 @@ const App: FunctionComponent = () => {
 
 	useEffect(() => keymapEffect(dispatch), []);
 	useEffect(() => commandPalleteEffect(dispatch), []);
-	useEffect(() => tabbarEffect(dispatch), []);
 
 	if (root == null) {
 		return null;

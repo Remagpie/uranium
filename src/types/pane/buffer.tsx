@@ -12,12 +12,12 @@ export default class BufferPane implements BasePane {
 	public static [immerable] = true as const;
 
 	public id: string;
-	public buffer: BaseBuffer["id"][];
+	public buffer: BaseBuffer["id"];
 	public children = [];
 
-	public constructor() {
+	public constructor(buffer: BaseBuffer["id"]) {
 		this.id = uuid();
-		this.buffer = [];
+		this.buffer = buffer;
 		this.children = [];
 	}
 

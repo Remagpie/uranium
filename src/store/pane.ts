@@ -6,17 +6,14 @@ import type {ActionType} from "typesafe-actions";
 
 import {State as RootState, ThunkAction} from "#store";
 import {BasePane} from "#types/pane/base";
-import BufferPane from "#types/pane/buffer";
 
 type RootHook = (vnode: VNode) => any;
-type BufferPaneHook = (vnode: VNode, pane: BufferPane) => any;
 
 export type State = {
 	root: BasePane["id"] | null;
 	pane: Map<string, BasePane>;
 	hook: {
 		root: Array<RootHook>;
-		buffer: Array<BufferPaneHook>;
 	};
 };
 
@@ -25,7 +22,6 @@ const initialState: State = {
 	pane: new Map(),
 	hook: {
 		root: [],
-		buffer: [],
 	},
 };
 
@@ -34,14 +30,11 @@ export const selectRootId = createSelector(selectState, (state) => state.root);
 export const selectPaneMap = createSelector(selectState, (state) => state.pane);
 export const selectPane = (id: string) => (state: RootState) => selectPaneMap(state).get(id);
 export const selectRootHook = createSelector(selectState, (state) => state.hook.root);
-export const selectBufferHook = createSelector(selectState, (state) => state.hook.buffer);
 
 export const putRoot = createAction("pane/root/put")<State["root"]>();
 export const putPane = createAction("pane/put")<BasePane>();
 export const putRootHook = createAction("pane/hook/root/put")<RootHook>();
 export const deleteRootHook = createAction("pane/hook/root/delete")<RootHook>();
-export const putBufferHook = createAction("pane/hook/buffer/put")<BufferPaneHook>();
-export const deleteBufferHook = createAction("pane/hook/buffer/delete")<BufferPaneHook>();
 
 export function patchPane(id: string, callback: (pane: BasePane) => void): ThunkAction<void> {
 	return (dispatch, getState) => {
@@ -62,9 +55,7 @@ export type Action =
 	| ActionType<typeof putRoot>
 	| ActionType<typeof putPane>
 	| ActionType<typeof putRootHook>
-	| ActionType<typeof deleteRootHook>
-	| ActionType<typeof putBufferHook>
-	| ActionType<typeof deleteBufferHook>;
+	| ActionType<typeof deleteRootHook>;
 
 export const reducer = createReducer<State, Action>(initialState, {
 	"pane/root/put": (state, action) => produce(state, (s) => {
@@ -82,13 +73,5 @@ export const reducer = createReducer<State, Action>(initialState, {
 	"pane/hook/root/delete": (state, action) => produce(state, (s) => {
 		const hook = action.payload;
 		s.hook.root = s.hook.root.filter((h) => h !== hook);
-	}),
-	"pane/hook/buffer/put": (state, action) => produce(state, (s) => {
-		const hook = action.payload;
-		s.hook.buffer.push(hook);
-	}),
-	"pane/hook/buffer/delete": (state, action) => produce(state, (s) => {
-		const hook = action.payload;
-		s.hook.buffer = s.hook.buffer.filter((h) => h !== hook);
 	}),
 });
