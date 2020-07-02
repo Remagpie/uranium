@@ -1,6 +1,3 @@
-import {h} from "preact";
-import type {ComponentProps} from "preact";
-
 import {promises as fs} from "fs";
 import {immerable} from "immer";
 import {v4 as uuid} from "uuid";
@@ -14,6 +11,7 @@ export default class TextBuffer implements BaseBuffer {
 	public id: string;
 	public content: string;
 	public file?: fs.FileHandle;
+	public View = TextBufferView as BaseBuffer["View"];
 
 	public static async open(path: string): Promise<TextBuffer> {
 		const handle = await fs.open(path, "r+");
@@ -28,13 +26,5 @@ export default class TextBuffer implements BaseBuffer {
 	public constructor(content: string) {
 		this.id = uuid();
 		this.content = content;
-
-		this.View = this.View.bind(this);
-	}
-
-	public View(props: ComponentProps<BaseBuffer["View"]>) {
-		const {className} = props;
-
-		return <TextBufferView className={className} buffer={this} />;
 	}
 }

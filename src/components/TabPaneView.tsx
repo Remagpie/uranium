@@ -45,8 +45,7 @@ const TabPaneView: FunctionComponent<Props> = (props) => {
 	if (pane.active != null) {
 		const body = useSelector(selectPane(pane.active));
 		if (body != null) {
-			const BodyView = body.View.bind(body);
-			bodyNode = <BodyView className={styles.body} />;
+			bodyNode = <body.View pane={body} className={styles.body} />;
 		}
 	}
 

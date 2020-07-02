@@ -1,6 +1,3 @@
-import {h} from "preact";
-import type {ComponentProps} from "preact";
-
 import {immerable} from "immer";
 import {v4 as uuid} from "uuid";
 
@@ -13,15 +10,10 @@ export default class TabPane implements BasePane {
 	public id: BasePane["id"];
 	public children: BasePane["children"] = [];
 	public active?: BasePane["id"];
+	public View = TabPaneView as BasePane["View"];
 
 	public constructor() {
 		this.id = uuid();
 		this.children = [];
-	}
-
-	public View(props: ComponentProps<BasePane["View"]>) {
-		const {className} = props;
-
-		return <TabPaneView className={className} pane={this} />;
 	}
 }

@@ -1,6 +1,3 @@
-import {h} from "preact";
-import type {ComponentProps} from "preact";
-
 import {immerable} from "immer";
 import {v4 as uuid} from "uuid";
 
@@ -14,16 +11,11 @@ export default class BufferPane implements BasePane {
 	public id: string;
 	public buffer: BaseBuffer["id"];
 	public children = [];
+	public View = BufferPaneView as BasePane["View"];
 
 	public constructor(buffer: BaseBuffer["id"]) {
 		this.id = uuid();
 		this.buffer = buffer;
 		this.children = [];
-	}
-
-	public View(props: ComponentProps<BasePane["View"]>) {
-		const {className} = props;
-
-		return <BufferPaneView className={className} pane={this} />;
 	}
 }

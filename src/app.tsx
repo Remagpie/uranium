@@ -76,9 +76,7 @@ const App: FunctionComponent = () => {
 	}
 
 	const pane = useSelector(selectPane(root))!;
-	const PaneView = pane.View.bind(pane);
-
-	const vnode = <PaneView className={styles.root} />;
+	const vnode = <pane.View pane={pane} className={styles.root} />;
 	rootHook.forEach((hook) => { hook(vnode); });
 
 	return vnode;

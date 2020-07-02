@@ -31,9 +31,7 @@ const BufferPaneView: FunctionComponent<Props> = (props) => {
 	const buffer = useSelector(selectBuffer(pane.buffer));
 	let bufferNode: VNode | undefined;
 	if (buffer != null) {
-		const BufferView = buffer.View.bind(buffer);
-
-		bufferNode = <BufferView className={styles.buffer} />;
+		bufferNode = <buffer.View className={styles.buffer} buffer={buffer} />;
 	}
 
 	return (
