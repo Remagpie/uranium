@@ -5,14 +5,27 @@ import type {ActionType} from "typesafe-actions";
 
 import {State as RootState, ThunkAction} from "#store";
 import Command from "#types/command";
+import * as bufferCommand from "./buffer";
+import * as coreCommand from "./core";
 
 export type State = {
 	command: Map<string, Command>;
 };
 
-const initialState: State = {
-	command: new Map(),
-};
+const initialState: State = (() => {
+	const state = {
+		command: new Map(),
+	};
+
+	for (const command of Object.values(bufferCommand)) {
+		state.command.set(command.id, command);
+	}
+	for (const command of Object.values(coreCommand)) {
+		state.command.set(command.id, command);
+	}
+
+	return state;
+})();
 
 export const selectState = (state: RootState): State => state.command;
 export const selectCommandMap = createSelector(selectState, (state) => state.command);
