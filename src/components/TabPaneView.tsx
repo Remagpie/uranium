@@ -50,14 +50,12 @@ const TabPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDi
 		}
 	}
 
-	const vnode = (
-		<upane type="tab" className={mergeClass(styles.root, className)} ref={ref}>
+	return (
+		<upane type="tab" className={mergeClass(styles.root, className)} ref={ref} tabIndex={-1}>
 			<div className={styles.tabBar}>{tabItemList}</div>
 			{bodyNode}
 		</upane>
 	);
-
-	return vnode;
 });
 TabPaneView.displayName = "TabPaneView";
 

@@ -1,7 +1,7 @@
 import {h} from "preact";
 import type {FunctionComponent} from "preact";
 
-import {useEffect} from "preact/hooks";
+import {useEffect, useLayoutEffect, useRef} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
@@ -23,6 +23,7 @@ const App: FunctionComponent = () => {
 
 	const styles = useStyles();
 	const dispatch = useDispatch();
+	const rootRef = useRef<HTMLDivElement>();
 
 	const root = useSelector(selectRootId);
 	const rootPane = useSelector(selectPane(root))!;
@@ -31,7 +32,9 @@ const App: FunctionComponent = () => {
 	useEffect(() => keymapEffect(dispatch), []);
 	useEffect(() => commandPalleteEffect(dispatch), []);
 
-	const vnode = <rootPane.View pane={rootPane} className={styles.root} />;
+	useLayoutEffect(() => { rootRef.current?.focus(); }, []);
+
+	const vnode = <rootPane.View pane={rootPane} className={styles.root} ref={rootRef} />;
 	rootHook.forEach((hook) => { hook(vnode); });
 
 	return vnode;

@@ -36,7 +36,7 @@ const BufferPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTM
 	}
 
 	return (
-		<upane type="buffer" className={mergeClass(styles.root, className)} ref={ref}>
+		<upane type="buffer" className={mergeClass(styles.root, className)} ref={ref} tabIndex={-1}>
 			{bufferNode}
 		</upane>
 	);

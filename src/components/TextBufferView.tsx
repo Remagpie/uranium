@@ -24,7 +24,7 @@ const TextBufferView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTM
 	const styles = useStyles();
 
 	return (
-		<ubuffer type="text" className={mergeClass(styles.root, className)} ref={ref}>
+		<ubuffer type="text" className={mergeClass(styles.root, className)} ref={ref} tabIndex={-1}>
 			{buffer.content}
 		</ubuffer>
 	);
