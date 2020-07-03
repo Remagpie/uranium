@@ -1,6 +1,7 @@
 import {h} from "preact";
-import type {FunctionComponent, VNode} from "preact";
+import type {FunctionComponent, Ref, VNode} from "preact";
 
+import {forwardRef} from "preact/compat";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
@@ -35,7 +36,7 @@ type Props = {
 	pane: TabPane;
 };
 
-const TabPaneView: FunctionComponent<Props> = (props) => {
+const TabPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
 	const {className, pane} = props;
 
 	const styles = useStyles();
@@ -50,14 +51,14 @@ const TabPaneView: FunctionComponent<Props> = (props) => {
 	}
 
 	const vnode = (
-		<upane type="tab" className={mergeClass(styles.root, className)}>
+		<upane type="tab" className={mergeClass(styles.root, className)} ref={ref}>
 			<div className={styles.tabBar}>{tabItemList}</div>
 			{bodyNode}
 		</upane>
 	);
 
 	return vnode;
-};
+});
 TabPaneView.displayName = "TabPaneView";
 
 export default TabPaneView;

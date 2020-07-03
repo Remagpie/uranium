@@ -1,6 +1,7 @@
 import {h} from "preact";
-import type {FunctionComponent, VNode} from "preact";
+import type {FunctionComponent, Ref, VNode} from "preact";
 
+import {forwardRef} from "preact/compat";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
@@ -23,7 +24,7 @@ type Props = {
 	pane: BufferPane;
 };
 
-const BufferPaneView: FunctionComponent<Props> = (props) => {
+const BufferPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
 	const {className, pane} = props;
 
 	const styles = useStyles();
@@ -35,11 +36,11 @@ const BufferPaneView: FunctionComponent<Props> = (props) => {
 	}
 
 	return (
-		<upane type="buffer" className={mergeClass(styles.root, className)}>
+		<upane type="buffer" className={mergeClass(styles.root, className)} ref={ref}>
 			{bufferNode}
 		</upane>
 	);
-};
+});
 BufferPaneView.displayName = "BufferPaneView";
 
 export default BufferPaneView;
