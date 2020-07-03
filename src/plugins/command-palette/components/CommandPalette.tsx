@@ -7,6 +7,7 @@ import {createUseStyles} from "react-jss";
 import UInput from "#components/UInput";
 import {useDispatch} from "#store";
 import {runCommand} from "#store/command";
+import Command from "#types/command";
 import {putShow} from "../store";
 
 const useStyles = createUseStyles({
@@ -31,12 +32,13 @@ const CommandPalette: FunctionComponent = () => {
 
 	const ref = useCallback((element: HTMLDivElement | null) => {
 		element?.addEventListener("command", (event) => {
-			if (!(event instanceof CustomEvent && typeof event.detail === "string")) {
+			if (!(event instanceof CustomEvent && event.detail instanceof Command)) {
 				return;
 			}
-			switch (event.detail) {
+			switch (event.detail.id) {
 				case "core/confirm": {
 					dispatch(putShow(false));
+					// TODO: Check if the command exists
 					dispatch(runCommand(text));
 					break;
 				}

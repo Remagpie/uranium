@@ -5,5 +5,4 @@ export const openFile = new Command({
 	package: "buffer",
 	title: "Open a file",
 	description: "",
-	action: async () => { /* TODO: open file in any tab view */ },
 });

@@ -5,5 +5,4 @@ export const confirm = new Command({
 	package: "core",
 	title: "Confirm",
 	description: "",
-	action: () => { /* Do nothing */ },
 });

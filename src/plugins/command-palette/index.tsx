@@ -18,7 +18,6 @@ const toggleCommand = new Command({
 	package: "command-palette",
 	title: "Command Palette: Toggle",
 	description: "",
-	action: (dispatch) => dispatch(store.toggleShow()),
 });
 
 function rootPaneHook(vnode: VNode) {
@@ -30,6 +29,18 @@ function rootPaneHook(vnode: VNode) {
 }
 
 export default function effect(dispatch: Dispatch) {
+	const onCommand = (event: Event) => {
+		if (!(event instanceof CustomEvent && event.detail instanceof Command)) {
+			return;
+		}
+		switch (event.detail.id) {
+			case toggleCommand.id: {
+				dispatch(store.toggleShow());
+				break;
+			}
+		}
+	};
+	document.body.addEventListener("command", onCommand);
 	dispatch(putReducer("command-palette", store.reducer));
 	dispatch(putCommand(toggleCommand));
 	dispatch(putRootHook(rootPaneHook));
@@ -45,5 +56,6 @@ export default function effect(dispatch: Dispatch) {
 		dispatch(deleteRootHook(rootPaneHook));
 		dispatch(deleteCommand(toggleCommand.id));
 		dispatch(deleteReducer("command-palette"));
+		document.body.removeEventListener("command", onCommand);
 	};
 }

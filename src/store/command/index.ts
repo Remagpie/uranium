@@ -35,7 +35,7 @@ export const deleteCommand = createAction("command/delete")<Command["id"]>();
 export const putCommand = createAction("command/put")<Command>();
 
 export function runCommand(id: string): ThunkAction<any> {
-	return (dispatch, getState): any => {
+	return (_dispatch, getState): any => {
 		const state = getState();
 		const command = selectCommand(id)(state);
 
@@ -47,10 +47,8 @@ export function runCommand(id: string): ThunkAction<any> {
 
 		document.activeElement?.dispatchEvent(new CustomEvent("command", {
 			bubbles: true,
-			detail: id,
+			detail: command,
 		}));
-		// eslint-disable-next-line consistent-return, @typescript-eslint/no-unsafe-return
-		return dispatch(command.action);
 	};
 }
 
