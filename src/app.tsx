@@ -1,10 +1,11 @@
 import {h} from "preact";
 import type {FunctionComponent} from "preact";
 
-import {useEffect, useLayoutEffect, useRef} from "preact/hooks";
+import {useEffect, useRef} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
+import * as hooks from "./hooks";
 import {useDispatch} from "#store";
 import {selectPane, selectRootId, selectRootHook} from "#store/pane";
 import commandPalleteEffect from "./plugins/command-palette";
@@ -31,8 +32,7 @@ const App: FunctionComponent = () => {
 
 	useEffect(() => keymapEffect(dispatch), []);
 	useEffect(() => commandPalleteEffect(dispatch), []);
-
-	useLayoutEffect(() => { rootRef.current?.focus(); }, []);
+	hooks.useFocusEffect(rootRef);
 
 	const vnode = <rootPane.View pane={rootPane} className={styles.root} ref={rootRef} />;
 	rootHook.forEach((hook) => { hook(vnode); });
