@@ -11,6 +11,10 @@ const useStyles = createUseStyles({
 	root: {
 		display: "block",
 	},
+	line: {
+		display: "block",
+		whiteSpace: "pre",
+	},
 });
 
 type Props = {
@@ -22,10 +26,11 @@ const TextBufferView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTM
 	const {buffer, className} = props;
 
 	const styles = useStyles();
+	const lineNodes = buffer.content.map((line) => <span className={styles.line}>{line}</span>);
 
 	return (
 		<ubuffer type="text" className={mergeClass(styles.root, className)} ref={ref} tabIndex={-1}>
-			{buffer.content}
+			{lineNodes}
 		</ubuffer>
 	);
 });

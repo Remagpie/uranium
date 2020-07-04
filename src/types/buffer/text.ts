@@ -9,7 +9,7 @@ export default class TextBuffer implements BaseBuffer {
 	public static [immerable] = true as const;
 
 	public id: string;
-	public content: string;
+	public content: string[];
 	public file?: fs.FileHandle;
 	public View = TextBufferView as BaseBuffer["View"];
 
@@ -17,14 +17,14 @@ export default class TextBuffer implements BaseBuffer {
 		const handle = await fs.open(path, "r+");
 		const content = await handle.readFile("utf8");
 
-		const buffer = new TextBuffer(content);
+		const buffer = new TextBuffer(content.split("\n"));
 		buffer.file = handle;
 
 		return buffer;
 	}
 
-	public constructor(content: string) {
+	public constructor(lines: string[]) {
 		this.id = uuid();
-		this.content = content;
+		this.content = lines;
 	}
 }
