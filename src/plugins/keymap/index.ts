@@ -11,6 +11,30 @@ export default function effect(dispatch: Dispatch) {
 		selector: "body",
 		command: "core/confirm",
 	}));
+	dispatch(store.putKeymap({
+		group: "core",
+		key: ["<up>"],
+		selector: "body",
+		command: "core/move-up",
+	}));
+	dispatch(store.putKeymap({
+		group: "core",
+		key: ["<down>"],
+		selector: "body",
+		command: "core/move-down",
+	}));
+	dispatch(store.putKeymap({
+		group: "core",
+		key: ["<left>"],
+		selector: "body",
+		command: "core/move-left",
+	}));
+	dispatch(store.putKeymap({
+		group: "core",
+		key: ["<right>"],
+		selector: "body",
+		command: "core/move-right",
+	}));
 
 	const onKeyDown = (event: KeyboardEvent) => {
 		const matched = dispatch(store.applyEvent(event));

@@ -29,4 +29,11 @@ export default class TextBuffer implements BaseBuffer {
 		this.content = lines;
 		this.cursor = [0, 0];
 	}
+
+	public moveCursor(xDiff: number, yDiff: number) {
+		this.cursor[1] =
+			Math.max(0, Math.min(this.cursor[1] + yDiff, this.content.length - 1));
+		this.cursor[0] =
+			Math.max(0, Math.min(this.cursor[0] + xDiff, this.content[this.cursor[1]].length - 1));
+	}
 }

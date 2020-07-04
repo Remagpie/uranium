@@ -42,6 +42,10 @@ export function normalizeEvent(event: KeyboardEvent): string {
 		case "KeyY": stroke += "y"; break;
 		case "KeyZ": stroke += "z"; break;
 		case "Enter": stroke += "RET"; break;
+		case "ArrowUp": stroke += "<up>"; break;
+		case "ArrowDown": stroke += "<down>"; break;
+		case "ArrowLeft": stroke += "<left>"; break;
+		case "ArrowRight": stroke += "<right>"; break;
 		// TODO: Throw a better error
 		default: stroke += "UNKNOWN"; break;
 	}
