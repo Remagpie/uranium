@@ -44,8 +44,10 @@ module.exports = {
 			template: path.join(electronDir, "index.html"),
 		}),
 		new ForkTsCheckerWebpackPlugin({
-			tsconfig: path.join(rootDir, "tsconfig.json"),
-			measureCompilationTime: true,
+			typescript: {
+				configFile: path.join(rootDir, "tsconfig.json"),
+				profile: true,
+			},
 		}),
 	],
 	node: false,
