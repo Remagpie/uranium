@@ -4,8 +4,10 @@ declare module preact {
 		interface IntrinsicElements {
 			uapp: IntrinsicElements["div"];
 			ubuffer: IntrinsicElements["div"];
+			uchar: IntrinsicElements["div"];
 			upalette: IntrinsicElements["div"];
 			upane: IntrinsicElements["div"];
+			uspan: IntrinsicElements["div"];
 			utabbar: IntrinsicElements["div"];
 		}
 	}

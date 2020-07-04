@@ -5,6 +5,7 @@ import {forwardRef} from "preact/compat";
 import {createUseStyles} from "react-jss";
 
 import {mergeClass} from "../nuquery";
+import USpan from "#components/USpan";
 import TextBuffer from "#types/buffer/text";
 
 const useStyles = createUseStyles({
@@ -26,7 +27,11 @@ const TextBufferView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTM
 	const {buffer, className} = props;
 
 	const styles = useStyles();
-	const lineNodes = buffer.content.map((line) => <span className={styles.line}>{line}</span>);
+	const lineNodes = buffer.content.map((line, index) => {
+		const cursor = buffer.cursor[1] === index ? buffer.cursor[0] : undefined;
+
+		return <USpan cursor={cursor} className={styles.line}>{line}</USpan>;
+	});
 
 	return (
 		<ubuffer type="text" className={mergeClass(styles.root, className)} ref={ref} tabIndex={-1}>

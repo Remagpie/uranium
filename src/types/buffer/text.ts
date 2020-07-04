@@ -9,9 +9,10 @@ export default class TextBuffer implements BaseBuffer {
 	public static [immerable] = true as const;
 
 	public id: string;
+	public View = TextBufferView as BaseBuffer["View"];
 	public content: string[];
 	public file?: fs.FileHandle;
-	public View = TextBufferView as BaseBuffer["View"];
+	public cursor: [number, number];
 
 	public static async open(path: string): Promise<TextBuffer> {
 		const handle = await fs.open(path, "r+");
@@ -26,5 +27,6 @@ export default class TextBuffer implements BaseBuffer {
 	public constructor(lines: string[]) {
 		this.id = uuid();
 		this.content = lines;
+		this.cursor = [0, 0];
 	}
 }
