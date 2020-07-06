@@ -6,7 +6,7 @@ import {createUseStyles} from "react-jss";
 
 import * as hooks from "../hooks";
 import {mergeClass} from "../nuquery";
-import USpan from "#components/USpan";
+import UTextArea from "#components/UTextArea";
 import {useDispatch} from "#store";
 import {patchBuffer} from "#store/buffer";
 import TextBuffer from "#types/buffer/text";
@@ -44,12 +44,6 @@ const TextBufferView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTM
 		},
 	}, [buffer.id]);
 
-	const lineNodes = buffer.content.map((line, index) => {
-		const cursor = buffer.cursor[1] === index ? buffer.cursor[0] : undefined;
-
-		return <USpan cursor={cursor} className={styles.line}>{line}</USpan>;
-	});
-
 	return (
 		<ubuffer
 			type="text"
@@ -57,7 +51,7 @@ const TextBufferView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTM
 			ref={bufferRef}
 			tabIndex={-1}
 		>
-			{lineNodes}
+			<UTextArea value={buffer.content} cursor={buffer.cursor} />
 		</ubuffer>
 	);
 });

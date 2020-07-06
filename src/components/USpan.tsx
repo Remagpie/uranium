@@ -18,11 +18,11 @@ const useStyles = createUseStyles({
 type Props = {
 	className?: string;
 	children?: string;
-	cursor?: number;
+	highlight?: [number, number];
 };
 
 const USpan: FunctionComponent<Props> = (props) => {
-	const {className, children, cursor} = props;
+	const {className, children, highlight} = props;
 	const styles = useStyles();
 
 	const charNodes = (children ?? "").split("").map((char, index) => {
