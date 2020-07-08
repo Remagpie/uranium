@@ -9,6 +9,7 @@ declare module preact {
 			upane: IntrinsicElements["div"];
 			uspan: IntrinsicElements["div"];
 			utabbar: IntrinsicElements["div"];
+			utextarea: IntrinsicElements["div"];
 		}
 	}
 }
