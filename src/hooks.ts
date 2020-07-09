@@ -5,15 +5,17 @@ import type {Inputs} from "preact/hooks";
 
 import Command from "#types/command";
 
-export function useChainedRef<T>(ref: Ref<T>) {
+export function useChainedRef<T>(ref: Ref<T> | null) {
 	const chainedRef = useRef<T>(null);
 	useEffect(() => {
-		if (typeof ref === "function") {
-			ref(chainedRef.current);
-		} else {
-			ref.current = chainedRef.current;
+		if (ref != null) {
+			if (typeof ref === "function") {
+				ref(chainedRef.current);
+			} else {
+				ref.current = chainedRef.current;
+			}
 		}
-	}, [chainedRef]);
+	}, [chainedRef, ref]);
 
 	return chainedRef;
 }

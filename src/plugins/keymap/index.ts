@@ -36,10 +36,17 @@ export default function effect(dispatch: Dispatch) {
 		command: "core/move-right",
 	}));
 
+	dispatch(store.putKeymap({
+	    group: "core",
+	    key: ["C-o"],
+	    selector: "body",
+	    command: "buffer/open-file",
+	}));
 	const onKeyDown = (event: KeyboardEvent) => {
 		const matched = dispatch(store.applyEvent(event));
 		if (matched) {
 			event.stopImmediatePropagation();
+			event.preventDefault();
 		}
 	};
 	document.addEventListener("keydown", onKeyDown, true);
