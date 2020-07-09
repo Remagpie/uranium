@@ -40,6 +40,7 @@ export default function effect(dispatch: Dispatch) {
 		const matched = dispatch(store.applyEvent(event));
 		if (matched) {
 			event.stopImmediatePropagation();
+			event.preventDefault();
 		}
 	};
 	document.addEventListener("keydown", onKeyDown, true);
