@@ -174,6 +174,7 @@ module.exports = {
 		"@typescript-eslint/prefer-as-const": "error",
 		"@typescript-eslint/prefer-function-type": "error",
 		"@typescript-eslint/prefer-includes": "off",
+		"@typescript-eslint/prefer-literal-enum-member": "error",
 		"@typescript-eslint/prefer-namespace-keyword": "off",
 		"@typescript-eslint/prefer-nullish-coalescing": ["error", {
 			ignoreConditionalTests: false,
