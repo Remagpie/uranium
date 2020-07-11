@@ -8,16 +8,12 @@ import UInput from "#components/UInput";
 import {useDispatch} from "#store";
 import {runCommand} from "#store/command";
 import Command from "#types/command";
-import {putShow} from "../store";
+import {hidePane} from "../store";
 
 const useStyles = createUseStyles({
 	root: {
 		display: "block",
-		position: "absolute",
 		width: 500,
-		top: 0,
-		left: "50%",
-		transform: "translateX(-50%)",
 	},
 	input: {
 		width: "100%",
@@ -37,7 +33,7 @@ const CommandPalette: FunctionComponent = () => {
 			}
 			switch (event.detail.id) {
 				case "core/confirm": {
-					dispatch(putShow(false));
+					dispatch(hidePane());
 					// TODO: Check if the command exists
 					dispatch(runCommand(text));
 					break;

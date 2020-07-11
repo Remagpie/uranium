@@ -6,6 +6,7 @@ import type {ActionType} from "typesafe-actions";
 
 import {State as RootState, ThunkAction} from "#store";
 import {BasePane} from "#types/pane/base";
+import StackPane from "#types/pane/stack";
 import TabPane from "#types/pane/tab";
 
 type RootHook = (vnode: VNode) => any;
@@ -20,11 +21,17 @@ export type State = {
 
 const initialState: State = (() => {
 	// Insert a default root pane
-	const root = new TabPane();
+	const root = new StackPane();
+
+	const tabPane = new TabPane();
+	root.children.push(tabPane.id);
 
 	return {
 		root: root.id,
-		pane: new Map([[root.id, root]]),
+		pane: new Map([
+			[root.id, root],
+			[tabPane.id, tabPane],
+		]),
 		hook: {
 			root: [],
 		},

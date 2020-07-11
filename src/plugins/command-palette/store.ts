@@ -3,33 +3,68 @@ import {createSelector} from "reselect";
 import {createAction, createReducer} from "typesafe-actions";
 import type {ActionType} from "typesafe-actions";
 
-import type {State as RootState} from "#store";
+import type {State as RootState, ThunkAction} from "#store";
+import * as paneStore from "#store/pane";
+import type FloatPane from "#types/pane/float";
 
 export type State = {
-	show: boolean;
+	pane?: FloatPane["id"];
 };
 
-const initialState: State = {
-	show: false,
-};
+const initialState: State = {};
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 export const selectState = (state: RootState): State => state["command-palette"];
-export const selectShow = createSelector(selectState, (state) => state.show);
+export const selectPaneId = createSelector(selectState, (state) => state.pane);
 
-export const putShow = createAction("command-palette/show/put")<boolean>();
-export const toggleShow = createAction("command-palette/show/toggle")();
+export function showPane(): ThunkAction<void> {
+	return (dispatch, getState) => {
+		const state = getState();
+		const id = selectPaneId(state);
+		if (id == null) {
+			return;
+		}
 
-export type Action =
-	| ActionType<typeof putShow>
-	| ActionType<typeof toggleShow>;
+		dispatch(paneStore.patchPane(id, (pane) => { pane.display = true; }));
+	};
+}
+
+export function hidePane(): ThunkAction<void> {
+	return (dispatch, getState) => {
+		const state = getState();
+		const id = selectPaneId(state);
+		if (id == null) {
+			return;
+		}
+
+		dispatch(paneStore.patchPane(id, (pane) => { pane.display = false; }));
+	};
+}
+
+export function togglePane(): ThunkAction<void> {
+	return (dispatch, getState) => {
+		const state = getState();
+		const id = selectPaneId(state);
+		if (id == null) {
+			return;
+		}
+
+		const pane = paneStore.selectPane(id)(state);
+		if (pane == null) {
+			return;
+		}
+
+		dispatch(pane.display ? hidePane() : showPane());
+	};
+}
+
+export const putPane = createAction("command-palette/pane/put")<FloatPane["id"]>();
+
+export type Action = ActionType<typeof putPane>;
 
 export const reducer = createReducer<State, Action>(initialState, {
-	"command-palette/show/put": (state, action) => produce(state, (s) => {
-		const show = action.payload;
-		s.show = show;
-	}),
-	"command-palette/show/toggle": (state) => produce(state, (s) => {
-		s.show = !s.show;
+	"command-palette/pane/put": (state, action) => produce(state, (s) => {
+		const id = action.payload;
+		s.pane = id;
 	}),
 });
