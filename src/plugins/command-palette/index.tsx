@@ -4,10 +4,9 @@ import {deleteReducer, putReducer} from "#store";
 import type {Dispatch} from "#store";
 import {deleteCommand, putCommand} from "#store/command";
 import * as paneStore from "#store/pane";
-import FloatPane from "#types/pane/float";
 import Command from "#types/command";
 import {deleteKeymapGroup, putKeymap} from "../keymap/store";
-import CommandPalette from "./components/CommandPalette";
+import CommandPalettePane from "./pane";
 import * as store from "./store";
 
 const toggleCommand = new Command({
@@ -19,13 +18,7 @@ const toggleCommand = new Command({
 
 export default function effect(dispatch: Dispatch) {
 	const root = useSelector(paneStore.selectRootId);
-	const pane = new FloatPane(CommandPalette, {
-		top: 0,
-		left: "50%",
-		width: "auto",
-		height: "auto",
-		transform: "translateX(-50%)",
-	});
+	const pane = new CommandPalettePane();
 	pane.display = false;
 
 	const onCommand = (event: Event) => {

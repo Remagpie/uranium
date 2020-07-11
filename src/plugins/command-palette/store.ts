@@ -5,10 +5,10 @@ import type {ActionType} from "typesafe-actions";
 
 import type {State as RootState, ThunkAction} from "#store";
 import * as paneStore from "#store/pane";
-import type FloatPane from "#types/pane/float";
+import type CommandPalettePane from "./pane";
 
 export type State = {
-	pane?: FloatPane["id"];
+	pane?: CommandPalettePane["id"];
 };
 
 const initialState: State = {};
@@ -58,7 +58,7 @@ export function togglePane(): ThunkAction<void> {
 	};
 }
 
-export const putPane = createAction("command-palette/pane/put")<FloatPane["id"]>();
+export const putPane = createAction("command-palette/pane/put")<CommandPalettePane["id"]>();
 
 export type Action = ActionType<typeof putPane>;
 
