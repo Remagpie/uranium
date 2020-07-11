@@ -35,6 +35,12 @@ export default function effect(dispatch: Dispatch) {
 		selector: "body",
 		command: "core/move-right",
 	}));
+	dispatch(store.putKeymap({
+		group: "core",
+		key: ["C-o"],
+		selector: "body",
+		command: "buffer/open-file",
+	}));
 
 	const onKeyDown = (event: KeyboardEvent) => {
 		const matched = dispatch(store.applyEvent(event));

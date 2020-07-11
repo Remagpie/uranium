@@ -1,6 +1,8 @@
 import {h} from "preact";
 import type {FunctionComponent, Ref, VNode} from "preact";
 
+import {ipcRenderer} from "electron";
+import type {OpenDialogReturnValue} from "electron";
 import {forwardRef} from "preact/compat";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
@@ -50,15 +52,25 @@ const TabPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDi
 
 	hooks.useCommandEvent(paneRef, {
 		"buffer/open-file": async () => {
-			const buffer = await TextBuffer.open("./package.json");
-			dispatch(putBuffer(buffer));
+			const dialogResult: OpenDialogReturnValue = await ipcRenderer.invoke("dialog.open", {
+				title: "Select a file to open",
+			});
 
-			const bufferPane = new BufferPane(buffer.id);
-			dispatch(putPane(bufferPane));
-			dispatch(patchPane(pane.id, (p) => {
-				p.children.push(bufferPane.id);
-				(p as TabPane).active = bufferPane.id;
-			}));
+			if (dialogResult.canceled) {
+				return;
+			}
+
+			for (const file of dialogResult.filePaths) {
+				const buffer = await TextBuffer.open(file);
+				dispatch(putBuffer(buffer));
+
+				const bufferPane = new BufferPane(buffer.id);
+				dispatch(putPane(bufferPane));
+				dispatch(patchPane(pane.id, (p) => {
+					p.children.push(bufferPane.id);
+					(p as TabPane).active = bufferPane.id;
+				}));
+			}
 		},
 	}, [pane]);
 
