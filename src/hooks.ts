@@ -45,7 +45,7 @@ export function useCommandEvent(
 		return () => {
 			ref.current?.removeEventListener("command", onCommand);
 		};
-	}, [ref]);
+	}, [onCommand, ref]);
 }
 
 export function useFocusEffect(ref: RefObject<HTMLElement>) {
