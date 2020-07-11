@@ -74,7 +74,15 @@ const TabPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDi
 		},
 	}, [pane]);
 
-	const tabItemList = pane.children.map((id) => <li className={styles.tabItem}>{id}</li>);
+	const tabItemList = pane.children.map((id) => {
+		const child = useSelector(selectPane(id));
+		// eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+		if (child != null && child.display) {
+			return <li className={styles.tabItem}>{id}</li>;
+		} else {
+			return null;
+		}
+	});
 	let bodyNode: VNode | undefined;
 	if (pane.active != null) {
 		const body = useSelector(selectPane(pane.active));
