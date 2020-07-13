@@ -1,5 +1,4 @@
 import {h, render} from "preact";
-import type {FunctionComponent} from "preact";
 
 import * as immer from "immer";
 import jss from "jss";
@@ -25,7 +24,7 @@ jss.use(jssDefaultUnit());
 jss.use(jssExpand());
 jss.use(jssPropsSort());
 
-const Root: FunctionComponent = () => (
+const Root = () => (
 	<Provider store={store}>
 		<App />
 	</Provider>

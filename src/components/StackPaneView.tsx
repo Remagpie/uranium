@@ -1,5 +1,4 @@
 import {h} from "preact";
-import type {FunctionComponent, Ref} from "preact";
 
 import {forwardRef} from "preact/compat";
 import {createUseStyles} from "react-jss";
@@ -28,7 +27,7 @@ type Props = {
 	pane: StackPane;
 };
 
-const StackPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
+const StackPaneView = forwardRef<HTMLDivElement, Props>((props, ref) => {
 	const {className, pane} = props;
 
 	const styles = useStyles();

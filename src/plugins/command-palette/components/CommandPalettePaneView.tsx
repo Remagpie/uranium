@@ -1,5 +1,4 @@
 import {h} from "preact";
-import type {FunctionComponent, Ref} from "preact";
 
 import {forwardRef} from "preact/compat";
 import {useCallback, useState} from "preact/hooks";
@@ -32,40 +31,38 @@ type Props = {
 	pane: CommandPalettePane;
 };
 
-const CommandPalettePaneView: FunctionComponent<Props> = forwardRef(
-	(props, ref: Ref<HTMLDivElement>) => {
-		const {className} = props;
+const CommandPalettePaneView = forwardRef<HTMLDivElement, Props>((props, ref) => {
+	const {className} = props;
 
-		const dispatch = useDispatch();
-		const styles = useStyles();
-		const paneRef = hooks.useChainedRef(ref);
+	const dispatch = useDispatch();
+	const styles = useStyles();
+	const paneRef = hooks.useChainedRef(ref);
 
-		const [text, setText] = useState("");
+	const [text, setText] = useState("");
 
-		hooks.useCommandEvent(paneRef, {
-			"core/confirm": () => {
-				dispatch(hidePane());
-				// TODO: Check if the command exists
-				dispatch(runCommand(text));
-			},
-		}, [text]);
+	hooks.useCommandEvent(paneRef, {
+		"core/confirm": () => {
+			dispatch(hidePane());
+			// TODO: Check if the command exists
+			dispatch(runCommand(text));
+		},
+	}, [text]);
 
-		const onInput = useCallback((event: h.JSX.TargetedEvent<HTMLInputElement>) => {
-			setText(event.currentTarget.value);
-		}, []);
+	const onInput = useCallback((event: h.JSX.TargetedEvent<HTMLInputElement>) => {
+		setText(event.currentTarget.value);
+	}, []);
 
-		return (
-			<upane
-				type="command-palette"
-				className={mergeClass(styles.root, className)}
-				ref={paneRef}
-				tabIndex={-1}
-			>
-				<UInput className={styles.input} value={text} onInput={onInput} />
-			</upane>
-		);
-	}
-);
+	return (
+		<upane
+			type="command-palette"
+			className={mergeClass(styles.root, className)}
+			ref={paneRef}
+			tabIndex={-1}
+		>
+			<UInput className={styles.input} value={text} onInput={onInput} />
+		</upane>
+	);
+});
 CommandPalettePaneView.displayName = "CommandPalettePaneView";
 
 export default CommandPalettePaneView;

@@ -1,5 +1,4 @@
 import {h} from "preact";
-import type {FunctionComponent} from "preact";
 
 import {createUseStyles} from "react-jss";
 
@@ -17,7 +16,7 @@ type Props = {
 	onInput?: h.JSX.IntrinsicElements["input"]["onInput"];
 };
 
-const UInput: FunctionComponent<Props> = (props) => {
+const UInput = (props: Props) => {
 	const {className, value, onInput} = props;
 	const styles = useStyles();
 

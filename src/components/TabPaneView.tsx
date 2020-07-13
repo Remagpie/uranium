@@ -1,5 +1,5 @@
 import {h} from "preact";
-import type {FunctionComponent, Ref, VNode} from "preact";
+import type {VNode} from "preact";
 
 import {ipcRenderer} from "electron";
 import type {OpenDialogReturnValue} from "electron";
@@ -43,7 +43,7 @@ type Props = {
 	pane: TabPane;
 };
 
-const TabPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
+const TabPaneView = forwardRef<HTMLDivElement, Props>((props, ref) => {
 	const {className, pane} = props;
 
 	const dispatch = useDispatch();

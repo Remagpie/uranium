@@ -1,5 +1,4 @@
 import {h} from "preact";
-import type {FunctionComponent, Ref} from "preact";
 
 import {forwardRef} from "preact/compat";
 import {useCallback, useEffect, useRef, useState} from "preact/hooks";
@@ -34,7 +33,7 @@ type Props = {
 	buffer: TextBuffer;
 };
 
-const TextBufferView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
+const TextBufferView = forwardRef<HTMLDivElement, Props>((props, ref) => {
 	const {buffer, className} = props;
 
 	const dispatch = useDispatch();

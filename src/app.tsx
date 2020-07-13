@@ -1,5 +1,4 @@
 import {h} from "preact";
-import type {FunctionComponent} from "preact";
 
 import {useEffect, useRef} from "preact/hooks";
 import {createUseStyles} from "react-jss";
@@ -19,7 +18,7 @@ const useStyles = createUseStyles({
 	},
 });
 
-const App: FunctionComponent = () => {
+const App = () => {
 	useResetStyles();
 
 	const styles = useStyles();

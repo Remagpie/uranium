@@ -1,5 +1,5 @@
 import {h} from "preact";
-import type {FunctionComponent, Ref, VNode} from "preact";
+import type {VNode} from "preact";
 
 import {forwardRef} from "preact/compat";
 import {createUseStyles} from "react-jss";
@@ -24,7 +24,7 @@ type Props = {
 	pane: BufferPane;
 };
 
-const BufferPaneView: FunctionComponent<Props> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
+const BufferPaneView = forwardRef<HTMLDivElement, Props>((props, ref) => {
 	const {className, pane} = props;
 
 	const styles = useStyles();
