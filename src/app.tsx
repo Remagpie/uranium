@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 
 import * as hooks from "./hooks";
 import {useDispatch} from "#store";
-import {selectPane, selectRootId, selectRootHook} from "#store/pane";
+import {selectPane, selectRootId} from "#store/pane";
 import commandPalleteEffect from "./plugins/command-palette";
 import keymapEffect from "./plugins/keymap";
 import useResetStyles from "./reset-style";
@@ -28,16 +28,12 @@ const App: FunctionComponent = () => {
 
 	const root = useSelector(selectRootId);
 	const rootPane = useSelector(selectPane(root))!;
-	const rootHook = useSelector(selectRootHook);
 
 	useEffect(() => keymapEffect(dispatch), []);
 	useEffect(() => commandPalleteEffect(dispatch), []);
 	hooks.useFocusEffect(rootRef);
 
-	const vnode = <rootPane.View pane={rootPane} className={styles.root} ref={rootRef} />;
-	rootHook.forEach((hook) => { hook(vnode); });
-
-	return vnode;
+	return <rootPane.View pane={rootPane} className={styles.root} ref={rootRef} />;
 };
 App.displayName = "App";
 
