@@ -1,14 +1,13 @@
-import {h} from "preact";
+import {h, Fragment} from "preact";
 
-import {useEffect, useRef} from "preact/hooks";
+import {useRef} from "preact/hooks";
 import {createUseStyles} from "react-jss";
 import {useSelector} from "react-redux";
 
 import * as hooks from "./hooks";
-import {useDispatch} from "#store";
 import {selectPane, selectRootId} from "#store/pane";
-import commandPalleteEffect from "./plugins/command-palette";
-import keymapEffect from "./plugins/keymap";
+import CommandPalettePlugin from "./plugins/command-palette";
+import KeymapPlugin from "./plugins/keymap";
 import useResetStyles from "./reset-style";
 
 const useStyles = createUseStyles({
@@ -22,17 +21,20 @@ const App = () => {
 	useResetStyles();
 
 	const styles = useStyles();
-	const dispatch = useDispatch();
 	const rootRef = useRef<HTMLDivElement>();
 
 	const root = useSelector(selectRootId);
 	const rootPane = useSelector(selectPane(root))!;
 
-	useEffect(() => keymapEffect(dispatch), []);
-	useEffect(() => commandPalleteEffect(dispatch), []);
 	hooks.useFocusEffect(rootRef);
 
-	return <rootPane.View pane={rootPane} className={styles.root} ref={rootRef} />;
+	return (
+		<Fragment>
+			<rootPane.View pane={rootPane} className={styles.root} ref={rootRef} />
+			<KeymapPlugin />
+			<CommandPalettePlugin />
+		</Fragment>
+	);
 };
 App.displayName = "App";
 
