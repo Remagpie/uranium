@@ -8,6 +8,7 @@ import * as hooks from "./hooks";
 import {selectPane, selectRootId} from "#store/pane";
 import CommandPalettePlugin from "./plugins/command-palette";
 import KeymapPlugin from "./plugins/keymap";
+import ProjectPlugin from "./plugins/project";
 import useResetStyles from "./reset-style";
 
 const useStyles = createUseStyles({
@@ -33,6 +34,7 @@ const App = () => {
 			<rootPane.View pane={rootPane} className={styles.root} ref={rootRef} />
 			<KeymapPlugin />
 			<CommandPalettePlugin />
+			<ProjectPlugin />
 		</Fragment>
 	);
 };
