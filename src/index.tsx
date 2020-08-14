@@ -1,2 +1,5 @@
-// eslint-disable-next-line no-console
-console.log("Hello, World!");
+import {h, render} from "preact";
+
+import App from "./app";
+
+render(<App />, document.getElementById("root")!);
