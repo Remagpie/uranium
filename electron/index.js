@@ -4,11 +4,13 @@ const electron = require("electron");
 
 async function main() {
     await electron.app.whenReady();
-    new electron.BrowserWindow({
+    const win = new electron.BrowserWindow({
         webPreferences: {
             nodeIntegration: true,
         },
     });
+
+  	win.loadURL("http://localhost:8080");
 }
 
 main();
