@@ -2,6 +2,8 @@ import {h} from "preact";
 
 import {createUseStyles} from "react-jss";
 
+import StackPaneView from "#components/pane/StackPaneView";
+import {StackPane} from "#types/pane/stack";
 import useResetStyles from "./reset-style";
 
 const useStyles = createUseStyles({
@@ -16,7 +18,15 @@ const App = () => {
 
 	const styles = useStyles();
 
-	return <div className={styles.root}>Hello, World!</div>;
+	const pane: StackPane = {
+		id: 0,
+		type: "stack",
+		display: true,
+		children: [],
+		active: undefined,
+	};
+
+	return <StackPaneView className={styles.root} pane={pane} />;
 };
 App.displayName = "App";
 
