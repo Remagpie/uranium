@@ -16,7 +16,16 @@
 	"license": "MIT",
 	"dependencies": {
 		"electron": "^9.2.0",
-		"preact": "^10.4.7"
+		"jss": "^10.3.0",
+		"jss-plugin-camel-case": "^10.3.0",
+		"jss-plugin-default-unit": "^10.3.0",
+		"jss-plugin-expand": "^10.3.0",
+		"jss-plugin-extend": "^10.3.0",
+		"jss-plugin-global": "^10.3.0",
+		"jss-plugin-nested": "^10.3.0",
+		"jss-plugin-props-sort": "^10.3.0",
+		"preact": "^10.4.7",
+		"react-jss": "^10.3.0"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^3.9.0",
