@@ -13,7 +13,7 @@
 	"author": "Joonmo Yang <dev@remagpie.com>",
 	"license": "MIT",
 	"dependencies": {
-		"immer": "^7.0.5",
+		"immer": "^8.0.1",
 		"jss": "^10.1.1",
 		"jss-plugin-camel-case": "^10.1.1",
 		"jss-plugin-default-unit": "^10.1.1",
