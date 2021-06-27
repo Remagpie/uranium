@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "ES2019",
+		"module": "ES2015",
+		"moduleResolution": "Node",
+		"lib": [
+			"DOM",
+			"ES2015",
+			"ES2019"
+		],
+		"jsx": "react",
+		"jsxFactory": "h",
+		"downlevelIteration": true,
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"paths": {}
+	},
+	"include": ["src/**/*"]
+}
