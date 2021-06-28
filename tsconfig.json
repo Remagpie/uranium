@@ -1,8 +1,7 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
 		"target": "ES2019",
-		"module": "ES2015",
+		"module": "CommonJS",
 		"moduleResolution": "Node",
 		"lib": [
 			"DOM",
